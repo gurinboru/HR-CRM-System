@@ -18,9 +18,9 @@ def login(request):
                     # return render(request, 'login/login.html', context={"form": form})
             else:
                 messages.error(request, 'Введен неверный логин или пароль')
-            return render(request, 'login/login.html', context={"form": form})
+            return render(request, 'authentication/login.html', context={"form": form})
     form = LoginForm()
-    return render(request, 'login/login.html', context={"form": form})
+    return render(request, 'authentication/login.html', context={"form": form})
 
 
 def registration_user(request):
@@ -35,12 +35,12 @@ def registration_user(request):
             return render(request, 'start/start.html')
         else:
             messages.error(request, 'Аккаунт уже существует или введены неверные данные')
-        return render(request, 'login/registration.html', context={"form": user_form})
+        return render(request, 'authentication/registration.html', context={"form": user_form})
     user_form = UserRegistrationForm()
-    return render(request, 'login/registration.html', context={"form": user_form})
+    return render(request, 'authentication/registration.html', context={"form": user_form})
 
 
 def user_logout(request):
     logout(request)
     form = LoginForm()
-    return render(request, 'login/login.html', context={"form": form})
+    return render(request, 'authentication/login.html', context={"form": form})

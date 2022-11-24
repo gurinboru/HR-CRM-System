@@ -1,10 +1,32 @@
-{% extends 'HR_CRM_System/header.html' %}
-{% load static %}
-{% block content %}
-    <main class="form-signin w-50 m-auto">
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8">
+  <title>Sakura</title>
+  <link rel="stylesheet" href="static/start/css/stylereg.css">
+</head>
 
-    </main>
-{% endblock %}
-{% block title %}
-Войти
-{% endblock %}
+<body>
+<div class="wrapper">
+    <div class="title">
+      Вход
+    </div>
+    <div class="form">
+
+        <div class="inputfield">
+          <label>Email</label>
+          <input type="text" class="input">
+       </div> 
+
+         <div class="inputfield">
+          <label>Пароль</label>
+          <input type="password" class="input">
+       </div>
+
+      <div class="inputfield">
+        <input type="submit" value="Войти" class="btn">
+      </div>
+    </div>
+</div>
+</body>
+</html>
