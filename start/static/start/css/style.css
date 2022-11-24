@@ -90,6 +90,7 @@ p {
     transform: translate3d(85px,0,0);
   }
 }
+
 /*Shrinking for mobile*/
 @media (max-width: 768px) {
   .waves {
@@ -122,3 +123,4 @@ p {
 .form-registration .form-floating:focus-within {
   z-index: 2;
 }
+
