@@ -3,35 +3,28 @@
 {% block content %}
 
 <body bgcolor="#76859B">
-
     <div class="md:grid px-0 pt-4 ml-8">
-                <a href="/add_job">
+        <a href="/add_job">
         <button class="h-8 bg-gray-800 hover:bg-gray-900 text-white text-sm font-medium hover:text-white pr-12 pl-12 hover:border-transparent rounded">Добавить вакансию</button>
-      </a>
-        </div>
-<div class=container style="position:relative">
-    {% for job in jobs %}<!--
-    <div class="mx-auto mt-8 max-w-7xl py-0 px-3 sm:px-6 lg:px-8">
-    <div class="flex flex-wrap items-center justify-between">
-      <div class="flex w-0 flex-1 items-center">
-        <p class="ml-3 truncate font-medium text-white">-->
-            <a href="cerjob/{{ job.id }}">
-          <div class="pt-6 pr-64 pl-64 overflow-hidden " style="background: #76859B">
-            <dl>
-      <div class="bg-gray-50 px-4 py-3 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6 rounded-t-lg">
-        <dt class="text-xl font-medium text-gray-900">{{ job.name }}</dt>
-      </div>
-      <div class="bg-white px-4 py-3 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6 rounded-b-lg">
-        <dt class="text-sm font-medium text-gray-900">{{ job.salary }} руб.</dt>
-        <dd class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">От {{ job.expirence }}-х лет</dd>
-      </div>
-            </dl>
         </a>
+    </div>
+<div class=container style="position:relative">
+    {% for job in jobs %}
+            <a href="cerjob/{{ job.id }}">
+            <div class="pt-6 pr-64 pl-64 overflow-hidden" style="background: #76859B">
+            <dl>
+            <div class="bg-gray-50 px-4 py-3 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6 rounded-t-lg">
+                <dt class="text-xl font-medium text-gray-900">{{ job.name }}</dt>
+            </div>
+            <div class="bg-white px-4 py-3 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6 rounded-b-lg">
+                <dt class="text-sm font-medium text-gray-900">{{ job.salary }} руб.</dt>
+                <dd class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">От {{ job.expirence }}-х лет</dd>
+            </div>
+            </dl>
+            </div>
+            </a>
         </dl>
-</div>
-       <!-- </p>
-      </div>
-    </div>-->
+    </div>
   </div>
 {% endfor %}
     </div>
