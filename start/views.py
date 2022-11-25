@@ -10,7 +10,7 @@ def getCandidates(request):
     content = {
         "candidates" : candidates
     }
-    return render(request, 'start/header.html',content)
+    return render(request, 'start/candidates.html',content)
 
 def getJobSeek(request):
     jobSeek = JobSeek.objects.all()
@@ -61,6 +61,8 @@ def addJob(request):
     return render(request,'',content)
 
 def addCandidate(request):
-    render(request, 'start/add_candidate.html')
     if request.method == 'POST':
         pass
+
+def add_candidate(request):
+    return render(request, 'start/add_candidate.html')

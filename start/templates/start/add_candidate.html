@@ -3,8 +3,77 @@
 {% extends 'start/header.html' %}
 {% load static %}
 {% block content %}
-<body>
 
-</body>
+    <form  action="/add_candidate" method="post">
+        {% csrf_token %}
+        <div class="row d-flex justify-content-center align-items-center h-100">
+            <div class="card rounded-3" style="width: 500px;">
+                <div class="card-body p-4 p-md-5">
+                    <h1 class="text-center h3 mb-3 fw-normal">Ваши данные</h1>
+                    <form class="px-md-2">
+                        <div class="form-outline mb-4">
+                            <label for="name">ФИО</label>
+                            <input type="text" class="form-control" name = "name" id="name" placeholder="ФИО">
+                        </div>
+
+                        <div class="form-outline mb-4">
+                            <label for="phone">Номер телефона</label>
+                            <input type="text" class="form-control" name = "phone" id="phone" placeholder="89.........">
+                        </div>
+
+                        <div class="form-outline mb-4">
+                            <label for="email">Email</label>
+                            <input type="email" class="form-control" name = "email" id="email" placeholder="example@mail.ru">
+                        </div>
+
+                        <div class="form-outline mb-4">
+                            <label for="sex">Пол</label>
+                            <input type="text" class="form-control" name = "sex" id="sex" placeholder="Муж/жен">
+                        </div>
+
+                        <div class="form-outline mb-4">
+                            <label for="birthdate">День рождения</label>
+                            <input type="text" class="form-control" name = "birthdate" id="birthdate" placeholder="01.01.1999">
+                        </div>
+
+                        <div class="form-outline mb-4">
+                            <label for="photo">Фото</label>
+                            <input type="file" class="form-control" name = "photo" id="photo">
+                        </div>
+
+                        <div class="form-outline mb-4">
+                            <label for="cv">Резюме</label>
+                            <input type="file" class="form-control" name = "cv" id="cv">
+                        </div>
+                        <button class="w-100 btn btn-primary" type="submit" >Сохранить данные кандидата</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </form>
+
+    {% if messages %}
+    {% for message in messages %}
+    {% if 'success' in message.tags %}
+        <div class="modal fade" tabindex="-1" role="dialog" id="myModalAddCandidate">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close" onclick="myModalAddCandidate.hide()"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title">Успех!</h4>
+                    </div>
+                    <div class="modal-body">
+                        <p>Изменение ваших данных прошло успешно!</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="myModalAddCandidate.hide()">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script src="{% static 'start/js/script.js' %}"></script>
+        {% endif %}
+        {% endfor %}
+    {% endif %}
 {% endblock %}
 </html>
