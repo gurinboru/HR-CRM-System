@@ -43,7 +43,7 @@ def getJob(request):
     content = {
         "jobs" : jobs
     }
-    return render(request, 'start/start.html',content)
+    return render(request, 'start/jobs.html',content)
 
 def addCurJobSeek(request):
     if request.method == 'POST':
