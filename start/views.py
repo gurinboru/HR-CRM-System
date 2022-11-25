@@ -146,7 +146,7 @@ def addJobSeek(request):
 
 @login_required(login_url='/login')
 def changeCandidate(request,pk):
-    candidate = Candidate.obgects.get(pk = pk)
+    candidate = Candidate.objects.get(pk = pk)
     if request.method == 'POST':
         form = AddCandidateForm(request.POST,request.FILES)
         if form.is_valid():
@@ -160,7 +160,7 @@ def changeCandidate(request,pk):
             candidate.birthdate=cd['birthdate']
             candidate.cv=cd['cv']
             candidate.save()
-            return redirect('cercandidate/'+pk)
+            return redirect('cercandidate', pk=candidate.id)
         else:
             messages.error(request, 'Кандидат уже существует или введены неверные данные')
     form = AddCandidateForm(initial={
@@ -177,7 +177,7 @@ def changeCandidate(request,pk):
         "form": form,
         "candidate": candidate
     }
-    return render(request, 'startchangeCandidate.html',content)
+    return render(request, 'start/change_candidate.html',content)
 
 @login_required(login_url='/login')
 def changeJob(request,pk):
@@ -191,9 +191,9 @@ def changeJob(request,pk):
             job.expirence=cd['expirence']
             job.employment=cd['employment']
             job.definition=cd['definition']
-            job.status=cd['status']
+            job.id_status=StatusJob.objects.get(status=cd['status'])
             job.save()
-            return redirect('cerjob/'+pk)
+            return redirect('cerjob', pk=job.id)
         else:
             messages.error(request, 'Введены неверные данные')
     form = AddJobForm(initial={
@@ -202,13 +202,13 @@ def changeJob(request,pk):
         "expirence" : job.expirence,
         "employment" : job.employment,
         "definition" : job.definition,
-        "status" : job.status,
+        "status" : job.id_status.status,
     })
     content = {
         "form": form,
-        "candidate": job
+        "job": job
     }
-    return render(request, 'start/changeJob.html',content)
+    return render(request, 'start/change_job.html',content)
 
 @login_required(login_url='/login')
 def changeJobSeek(request,pk):
@@ -251,7 +251,7 @@ def changeJobSeek(request,pk):
             jobSeek.meetemp_status = MeetEmpStatus.objects.get(status = cd['meetemp_status'])
             jobSeek.meetemp_status_defenition = cd['meetemp_status_defenition']
             jobSeek.save()
-            return redirect('cerjobSeek/'+pk)
+            return redirect('cerjobseek', pk=jobSeek.id)
         else:
             messages.error(request, 'Введены неверные данные')
     form = AddJobSeek(initial={
@@ -260,21 +260,21 @@ def changeJobSeek(request,pk):
         "offer":jobSeek.offer,
         "offer_definition":jobSeek.offer_definition,
         "release_date":jobSeek.release_date,
-        "denial_status":jobSeek.denial_status,
-        "call_status":jobSeek.call_status,
+        "denial_status":jobSeek.denial_status.status,
+        "call_status":jobSeek.call_status.status,
         "call_status_defenition":jobSeek.call_status_defenition,
-        "test_status":jobSeek.test_status,
+        "test_status":jobSeek.test_status.status,
         "test_status_defenition":jobSeek.test_status_defenition,
-        "meet_status":jobSeek.meet_status,
+        "meet_status":jobSeek.meet_status.status,
         "meet_status_defenition":jobSeek.meet_status_defenition,
-        "meetemp_status":jobSeek.meetemp_status,
+        "meetemp_status":jobSeek.meetemp_status.status,
         "meetemp_status_defenition":jobSeek.meetemp_status_defenition
     })
     content = {
         "form": form,
         "candidate": jobSeek
     }
-    return render(request,'start/changeJobSeek.html',content)
+    return render(request,'start/change_jobseek.html',content)
 
 @login_required(login_url='/login')
 def get_cv(request,pk):

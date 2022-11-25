@@ -38,6 +38,11 @@
           <dd class="mt-2 text-l text-black-500">{{ job.user.first_name }} {{ job.user.last_name }}</dd>
         </div>
       </dl>
+        <div class="inset-y-0 right-0 pr-2 sm:pr-0 sm:pl-96 bg-gray-50 px-4 py-1 sm:grid-cols-3 sm:gap-4 sm:px-80 rounded-b-lg">
+        <a href="/change_job/{{ job.id }}">
+        <button class="h-8 bg-gray-800 hover:bg-gray-900 text-white text-sm font-medium hover:text-white px-16 pl-16 hover:border-transparent rounded">Изменить</button>
+      </a>
+      </div>
     </div>
   </div>
 </body>
