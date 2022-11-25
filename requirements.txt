@@ -4,4 +4,4 @@ sqlparse==0.4.3
 python-dotenv==0.21.0
 mysqlclient==2.1.1
 django-crispy-forms
-Pillow
+Pillow==9.3.0

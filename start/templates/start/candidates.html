@@ -2,22 +2,24 @@
 {% load static %}
 {% block content %}
     <body bgcolor="#76859B">
+        <a class="bg-green-500 hover:bg-green-700 text-white font-bold rounded py-3 px-3" href="/add_candidate" role="button">Добавить кандидата</a>
         <div>
         {% for candidate in candidates %}
-            <div class="card" style="width: 18rem;">
-                <img src="..." class="card-img-top" alt="...">
-                <div class="card-body">
-                    <h5 class="card-title">{{ candidate.name }}</h5>
-                    <p class="card-text">{{ candidate.email }}</p>
-                        {% for job in jobSeek %}
-                            <p class="card-text">{{ job.name }}</p>
-                        {% endfor %}
-                    <a href="#" class="btn btn-primary">Go somewhere</a>
-                </div>
-            </div>
+            <a href="cercandidate/{{ candidate.id }}">
+                <button class="col-span-6 sm:col-span-6 md:col-span-3 lg:col-span-2 xl:col-span-2 align-content-center">
+                  <div class="bg-white shadow-lg hover:bg-gray-800 rounded-lg px-4 py-6 mx-4 my-4">
+{#                    <div class="mx-auto h-40 bg-gradient-to-r from-blue-300 via-green-100 to-pink-300 rounded-md rounded-md">{{ photo }}</div>#}
+                      <img src="{{ candidate.photo.url }}" width="450" height="300">
+                        <div class="bg-white h-15 text-black-600 font-semibold py-2 px-36 hover:border-transparent rounded">
+                            <a>{{ candidate.name }} <br> {{ candidate.email }} <br> {{ candidate.birthdate }}</a>
+                        </div>
+                    <div class="flex justify-center mt-4">
+                    </div>
+                  </div>
+                </button>
+            </a>
         {% endfor %}
-    </div>
-    <a class="btn btn-dark" href="/add_candidate" role="button">Добавить кандидата</a>
+        </div>
     </body>
 {% endblock %}
 {% block title %}
