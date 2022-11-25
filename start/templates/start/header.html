@@ -99,10 +99,14 @@
     </div>
   </div>
 </nav>
-    {% block content %}
-{% endblock %}
+
+
+
 {% else %}
 <nav class="bg-gray-800">
 </nav>
 {% endif %}
+
+{% block content %}
+{% endblock %}
 </body>
