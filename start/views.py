@@ -43,8 +43,7 @@ def getCerCandidate(request,pk):
     content = {
         "candidate" : candidate,
         "jobseek":jobseek,
-        "photo": FileResponse(open(os.path.join(os.path.dirname(os.path.dirname(__file__).parent), candidate.photo), 'rb'),content_type="image/jpeg")
-    }
+        }
     return render(request, 'start/cercandidate.html', content)
 
 @login_required(login_url='/login')
@@ -88,12 +87,41 @@ def addCandidate(request):
         form = AddCandidateForm(request.POST,request.FILES)
         if form.is_valid():
             cd = form.cleaned_data
-            Candidate(name = cd['name'], phone = cd['phone'], email = cd['email'], sex = cd['sex'], photo = cd['photo'],
+            Candidate(name = cd['name'], phone = cd['phone'], email = cd['email'], sex = cd['sex'], position = cd['position'], photo = cd['photo'],
                       birthdate = cd['birthdate'], cv = cd['cv']).save()
             return redirect('/candidates')
         else:
             messages.error(request, 'Кандидат уже существует или введены неверные данные')
     form = AddCandidateForm()
+    content = {
+        "form":form
+    }
+    return render(request, 'start/add_candidate.html', content)
+
+@login_required(login_url='/login')
+def addJobSeek(request):
+    if request.method == 'POST':
+        form = AddJobSeek(request.POST)
+        if form.is_valid():
+            cd = form.cleaned_data
+            JobSeek(job = Job.objects.get(cd['job']),
+            candidate = Candidate.objects.get(cd['job']),
+            offer = cd['offer'],
+            offer_definition = cd['offer_definition'],
+            release_date = cd['release_date'],
+            denial_status = DenialStatus.objects.get(status = cd['denial_status']),
+            call_status = CallStatus.objects.get(status = cd['call_status']),
+            call_status_defenition = cd['call_status_defenition'],
+            test_status = TestStatus.objects.get(status = cd['test_status']),
+            test_status_defenition = cd['test_status_defenition'],
+            meet_status = MeetStatus.objects.get(status = cd['meet_status']),
+            meet_status_defenition = cd['meet_status_defenition'],
+            meetemp_status = MeetEmpStatus.objects.get(status = cd['meetemp_status']),
+            meetemp_status_defenition = cd['meetemp_status_defenition']).save()
+            return redirect('/jobseek')
+        else:
+            messages.error(request, 'Заявка уже существует или введены неверные данные')
+    form = AddJobSeek()
     content = {
         "form":form
     }
@@ -110,6 +138,7 @@ def changeCandidate(request,pk):
             candidate.phone=cd['phone']
             candidate.email=cd['email']
             candidate.sex=cd['sex']
+            candidate.position = cd['position']
             candidate.photo=cd['photo']
             candidate.birthdate=cd['birthdate']
             candidate.cv=cd['cv']
@@ -122,6 +151,7 @@ def changeCandidate(request,pk):
         "phone": candidate.phone,
         "email": candidate.email,
         "sex": candidate.sex,
+        "position" : candidate.position,
         "photo": candidate.phone,
         "birthdate": candidate.birthdate,
         "cv": candidate.cv

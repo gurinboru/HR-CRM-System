@@ -124,6 +124,7 @@ class Candidate(models.Model):
     phone = models.TextField()
     email = models.EmailField()
     sex = models.TextField()
+    position = models.TextField()
     photo = models.ImageField(upload_to=userPhoto_directory_path)
     birthdate = models.DateField()
     cv = models.FileField(upload_to=userCV_directory_path)
