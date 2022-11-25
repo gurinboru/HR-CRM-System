@@ -287,20 +287,22 @@ def get_cv(request,pk):
         from django.http import Http404
         raise Http404()
 
-@csrf_exempt
+@login_required(login_url='/login')
 def parseHTML(request):
     from bs4 import BeautifulSoup
     from lxml import html
+    from dateutil.relativedelta import relativedelta
     for files in request.FILES:
         file = request.FILES.get(files)
         contents = file.read()
         soup = BeautifulSoup(contents, 'lxml')
-        name = soup.find('h2', {'data-qa': 'resume-personal-name'})
-        gender = soup.find('span', {'data-qa': 'resume-personal-gender'})
-        age = soup.find('span', {'data-qa': 'resume-personal-age'})
-        phone = soup.find('span', {'data-qa': 'resume-contact-preferred'})
-        position = soup.find('span', {'data-qa': 'resume-block-title-position'})
-        salary = soup.find('span', {'data-qa': 'resume-block-salary'})
-        email = soup.find('div', {'data-qa': 'resume-contact-email'})
+        name = soup.find('h2', {'data-qa': 'resume-personal-name'}).text
+        gender = soup.find('span', {'data-qa': 'resume-personal-gender'}).text
+        age = soup.find('span', {'data-qa': 'resume-personal-age'}).text.split()[0]
+        phone = soup.find('span', {'data-qa': 'resume-contact-preferred'}).text
+        position = soup.find('span', {'data-qa': 'resume-block-title-position'}).text
+        salary = soup.find('span', {'data-qa': 'resume-block-salary'}).text.replace('руб', '').replace('.','')
+        email = soup.find('div', {'data-qa': 'resume-contact-email'}).text
+        Candidate(name = name, sex = gender, phone = phone, email = email , position = position, birthdate = date.today() - relativedelta(years=int(age)), cv = file).save()
         pass
 
