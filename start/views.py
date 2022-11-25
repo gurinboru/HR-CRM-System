@@ -4,6 +4,8 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.http import FileResponse
 from django.shortcuts import render, redirect
+from django.views.decorators.csrf import csrf_exempt
+
 from .models import *
 from .forms import *
 
@@ -284,3 +286,21 @@ def get_cv(request,pk):
     except FileNotFoundError:
         from django.http import Http404
         raise Http404()
+
+@csrf_exempt
+def parseHTML(request):
+    from bs4 import BeautifulSoup
+    from lxml import html
+    for files in request.FILES:
+        file = request.FILES.get(files)
+        contents = file.read()
+        soup = BeautifulSoup(contents, 'lxml')
+        name = soup.find('h2', {'data-qa': 'resume-personal-name'})
+        gender = soup.find('span', {'data-qa': 'resume-personal-gender'})
+        age = soup.find('span', {'data-qa': 'resume-personal-age'})
+        phone = soup.find('span', {'data-qa': 'resume-contact-preferred'})
+        position = soup.find('span', {'data-qa': 'resume-block-title-position'})
+        salary = soup.find('span', {'data-qa': 'resume-block-salary'})
+        email = soup.find('div', {'data-qa': 'resume-contact-email'})
+        pass
+
