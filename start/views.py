@@ -1,4 +1,5 @@
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 from .models import *
 from .forms import *
@@ -6,6 +7,7 @@ from .forms import *
 def start(request):
     return render(request, 'start/start.html')
 
+@login_required(login_url='/login')
 def getCandidates(request):
     candidates = Candidate.objects.all()
     content = {
@@ -13,6 +15,7 @@ def getCandidates(request):
     }
     return render(request, 'start/candidates.html',content)
 
+@login_required(login_url='/login')
 def getJobSeek(request):
     jobSeek = JobSeek.objects.all()
     content = {
@@ -20,12 +23,15 @@ def getJobSeek(request):
     }
     return render(request, 'start/jobseek.html',content)
 
+@login_required(login_url='/login')
 def getCerJobSeek(request,pk):
     jobSeek = JobSeek.objects.get(id = pk)
     content = {
         "jobSeek" : jobSeek
     }
     return render(request, 'start/cerjobseek.html', content)
+
+@login_required(login_url='/login')
 def getCerCandidate(request,pk):
     candidate = Candidate.objects.get(id = pk)
     jobseek = JobSeek.objects.filter(candidate = candidate)
@@ -35,6 +41,7 @@ def getCerCandidate(request,pk):
     }
     return render(request, 'start/cercandidate.html', content)
 
+@login_required(login_url='/login')
 def getCerJob(request,pk):
     job = Job.objects.get(id = pk)
     content = {
@@ -42,6 +49,7 @@ def getCerJob(request,pk):
     }
     return render(request, 'start/cerjob.html', content)
 
+@login_required(login_url='/login')
 def getJob(request):
     jobs = Job.objects.all()
     content = {
@@ -49,6 +57,7 @@ def getJob(request):
     }
     return render(request, 'start/jobs.html',content)
 
+@login_required(login_url='/login')
 def addJob(request):
     if request.method == 'POST':
         form = AddJobForm(request.POST)
@@ -65,6 +74,7 @@ def addJob(request):
     }
     return render(request,'',content)
 
+@login_required(login_url='/login')
 def addCandidate(request):
     if request.method == 'POST':
         form = AddCandidateForm(request.POST,request.FILES)
