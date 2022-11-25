@@ -1,6 +1,6 @@
 from django import forms
 from django.contrib.auth.models import User
-from .models import Job
+from .models import Job,StatusJob
 
 class AddCandidateForm(forms.Form):
     name = forms.CharField(widget=forms.TextInput)
@@ -20,17 +20,7 @@ class AddJobForm(forms.Form):
     expirence = forms.IntegerField(widget=forms.NumberInput)
     employment = forms.CharField(widget=forms.TextInput)
     definition = forms.CharField(widget=forms.TextInput)
-
-    # class Meta:
-    #     model = Job
-    #     fields = ('name', 'salary', 'expirence', 'employment', 'definition')
-
-class AddJobForm(forms.Form):
-    name = forms.CharField(widget=forms.TextInput)
-    salary = forms.IntegerField(widget=forms.NumberInput)
-    expirence = forms.IntegerField(widget=forms.NumberInput)
-    employment = forms.CharField(widget=forms.TextInput)
-    definition = forms.CharField(widget=forms.TextInput)
+    status = forms.ChoiceField(choices = StatusJob.CHOICES)
         # class Meta:
         #     model = Job
         #     fields = ('name', 'salary', 'expirence', 'employment', 'definition', 'id_status', 'user')

@@ -5,10 +5,10 @@ from django.db import models
 # Статусы -----------------------------------------------
 class DenialStatus(models.Model):
     CHOICES = (
-        (0, 'Активный'),
-        (1, 'Отказ рекрутёра'),
-        (2, 'Отказ соискателя'),
-        (3, 'Отказ заказчика'),
+        ('Активный', 'Активный'),
+        ('Отказ рекрутёра', 'Отказ рекрутёра'),
+        ('Отказ соискателя', 'Отказ соискателя'),
+        ('Отказ заказчика', 'Отказ заказчика'),
     )
     status = models.CharField(choices=CHOICES, max_length=300)
 
@@ -19,9 +19,9 @@ class DenialStatus(models.Model):
 
 class CallStatus(models.Model):
     CHOICES = (
-        (0, 'Состоялось'),
-        (1, 'Перезвонить'),
-        (2, 'Недозвон')
+        ('Состоялось', 'Состоялось'),
+        ('Перезвонить', 'Перезвонить'),
+        ('Недозвон', 'Недозвон')
     )
     status = models.CharField(choices=CHOICES, max_length=300)
 
@@ -33,9 +33,9 @@ class CallStatus(models.Model):
 
 class MeetStatus(models.Model):
     CHOICES = (
-        (0, 'Запланировано'),
-        (1, 'Состоялось'),
-        (2, 'Не состоялось')
+        ('Запланировано', 'Запланировано'),
+        ('Состоялось', 'Состоялось'),
+        ('Не состоялось', 'Не состоялось')
     )
     status = models.CharField(choices=CHOICES, max_length=300)
 
@@ -47,9 +47,9 @@ class MeetStatus(models.Model):
 
 class MeetEmpStatus(models.Model):
     CHOICES = (
-        (0, 'Состоялось'),
-        (1, 'Перезвонить'),
-        (2, 'Недозвон')
+        ('Состоялось', 'Состоялось'),
+        ('Перезвонить', 'Перезвонить'),
+        ('Недозвон', 'Недозвон')
     )
     status = models.CharField(choices=CHOICES, max_length=300)
 
@@ -61,10 +61,10 @@ class MeetEmpStatus(models.Model):
 
 class TestStatus(models.Model):
     CHOICES = (
-        (0, 'В работе'),
-        (1, 'Не выполнено'),
-        (2, 'Отказ от выполнения'),
-        (3, 'Выполнено'),
+        ('В работе', 'В работе'),
+        ('Не выполнено', 'Не выполнено'),
+        ('Отказ от выполнения', 'Отказ от выполнения'),
+        ('Выполнено', 'Выполнено'),
     )
     status = models.CharField(choices=CHOICES, max_length=300)
 
@@ -85,6 +85,9 @@ class StatusJob(models.Model):
         db_table = 'statusjob'
         verbose_name = 'StatusJob'
         verbose_name_plural = 'StatusJob'
+
+        def __str__(self):
+            return self.status
 
 
 # Сущности ----------------------------------------------
