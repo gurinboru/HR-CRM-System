@@ -280,7 +280,7 @@ def get_cv(request,pk):
     candidate = Candidate.objects.get(pk = pk)
     try:
         from django.http import FileResponse
-        return FileResponse(open(os.path.join(os.path.dirname(os.path.dirname(__file__)),candidate.cv), 'rb'), content_type='application/pdf')
+        return FileResponse(open(os.path.join(os.path.dirname(os.path.dirname(__file__)),candidate.cv.url), 'rb'), content_type='application/pdf')
     except FileNotFoundError:
         from django.http import Http404
         raise Http404()
