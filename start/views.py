@@ -223,19 +223,19 @@ def changeJobSeek(request,pk):
                               value_after = CallStatus.objects.get(status = cd['call_status']).status,data = date.today(),
                               comment = cd['call_status_defenition']).save()
 
-            if jobSeek.test_status != CallStatus.objects.get(status=cd['test_status']):
+            if jobSeek.test_status != TestStatus.objects.get(status=cd['test_status']):
                 ActionHistory(job_seek = jobSeek, action_name ='Изменение статуса Тестового задания', value_before =jobSeek.test_status.status,
-                              value_after =CallStatus.objects.get(status=cd['test_status']).status, data = date.today(),
+                              value_after =TestStatus.objects.get(status=cd['test_status']).status, data = date.today(),
                               comment = cd['test_status_defenition']).save()
 
-            if jobSeek.meet_status != CallStatus.objects.get(status=cd['meet_status']):
+            if jobSeek.meet_status != MeetStatus.objects.get(status=cd['meet_status']):
                 ActionHistory(job_seek = jobSeek, action_name ='Изменение статуса Встречи с HR', value_before =jobSeek.meet_status.status,
-                              value_after =CallStatus.objects.get(status=cd['meet_status']).status, data = date.today(),
+                              value_after =MeetStatus.objects.get(status=cd['meet_status']).status, data = date.today(),
                               comment=cd['meet_status_defenition']).save()
 
-            if jobSeek.meetemp_status != CallStatus.objects.get(status=cd['meetemp_status']):
+            if jobSeek.meetemp_status != MeetEmpStatus.objects.get(status=cd['meetemp_status']):
                 ActionHistory(job_seek = jobSeek, action_name ='Изменение статуса встречи с заказчиком', value_before =jobSeek.meetemp_status.status,
-                              value_after =CallStatus.objects.get(status=cd['meetemp_status']).status, data = date.today(),
+                              value_after =MeetEmpStatus.objects.get(status=cd['meetemp_status']).status, data = date.today(),
                               comment = cd['meetemp_status_defenition']).save()
 
             jobSeek.offer = cd['offer']
@@ -272,7 +272,7 @@ def changeJobSeek(request,pk):
     })
     content = {
         "form": form,
-        "candidate": jobSeek
+        "jobSeek": jobSeek
     }
     return render(request,'start/change_jobseek.html',content)
 
