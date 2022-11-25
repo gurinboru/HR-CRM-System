@@ -1,3 +1,4 @@
+import datetime
 import os
 
 from django.contrib import messages
@@ -104,7 +105,7 @@ def addJobSeek(request):
         form = AddJobSeek(request.POST)
         if form.is_valid():
             cd = form.cleaned_data
-            JobSeek(job = Job.objects.get(cd['job']),
+            jobSeek = JobSeek(job = Job.objects.get(cd['job']),
             candidate = Candidate.objects.get(cd['job']),
             offer = cd['offer'],
             offer_definition = cd['offer_definition'],
@@ -117,7 +118,11 @@ def addJobSeek(request):
             meet_status = MeetStatus.objects.get(status = cd['meet_status']),
             meet_status_defenition = cd['meet_status_defenition'],
             meetemp_status = MeetEmpStatus.objects.get(status = cd['meetemp_status']),
-            meetemp_status_defenition = cd['meetemp_status_defenition']).save()
+            meetemp_status_defenition = cd['meetemp_status_defenition'])
+            jobSeek.save()
+            ActionHistory(jobSeek, 'Инициализация заявки', 'None',
+                          'Начальные значения', datetime.date,
+                          'Инициализация заявки').save()
             return redirect('/jobseek')
         else:
             messages.error(request, 'Заявка уже существует или введены неверные данные')
@@ -200,6 +205,27 @@ def changeJobSeek(request,pk):
         form = AddJobSeek(request.POST)
         if form.is_valid():
             cd = form.cleaned_data
+
+            if jobSeek.call_status != CallStatus.objects.get(status = cd['call_status']):
+                ActionHistory(jobSeek,'Изменение статуса Созвона с кандидатом',jobSeek.call_status.status,
+                              CallStatus.objects.get(status = cd['call_status']).status,datetime.date,
+                              cd['call_status_defenition'])
+
+            if jobSeek.test_status != CallStatus.objects.get(status=cd['test_status']):
+                ActionHistory(jobSeek, 'Изменение статуса Тестового задания', jobSeek.test_status.status,
+                              CallStatus.objects.get(status=cd['test_status']).status, datetime.date,
+                              cd['test_status_defenition'])
+
+            if jobSeek.meet_status != CallStatus.objects.get(status=cd['meet_status']):
+                ActionHistory(jobSeek, 'Изменение статуса Встречи с HR', jobSeek.meet_status.status,
+                              CallStatus.objects.get(status=cd['meet_status']).status, datetime.date,
+                              cd['meet_status_defenition'])
+
+            if jobSeek.meetemp_status != CallStatus.objects.get(status=cd['meetemp_status']):
+                ActionHistory(jobSeek, 'Изменение статуса встречи с заказчиком', jobSeek.meetemp_status.status,
+                              CallStatus.objects.get(status=cd['meetemp_status']).status, datetime.date,
+                              cd['meetemp_status_defenition'])
+
             jobSeek.offer = cd['offer']
             jobSeek.offer_definition = cd['offer_definition']
             jobSeek.release_date = cd['release_date']

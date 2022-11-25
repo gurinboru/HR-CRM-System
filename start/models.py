@@ -162,6 +162,7 @@ class ActionHistory(models.Model):
     value_before = models.TextField()
     value_after = models.TextField()
     data = models.DateField()
+    comment = models.TextField(null=True)
 
     class Meta:
         db_table = 'actionHistory'
