@@ -109,6 +109,9 @@ class Job(models.Model):
         verbose_name = 'Job'
         verbose_name_plural = 'Jobs'
 
+    def __str__(self):
+        return self.name
+
     # def save(self, *args, **kwargs):
     #     self.id_status = StatusJob.objects.get(pk=0)
     #     super().save(*args,**kwargs)
@@ -133,6 +136,9 @@ class Candidate(models.Model):
         db_table = 'candidates'
         verbose_name = 'Candidate'
         verbose_name_plural = 'Candidates'
+
+    def __str__(self):
+        return self.name
 
 class JobSeek(models.Model):
     job = models.ForeignKey('Job',on_delete=models.DO_NOTHING, db_column='job')

@@ -6,6 +6,8 @@
   <div class="px-4 py-5 sm:px-6">
     <h3 class="text-lg font-medium leading-6 text-gray-900">Ваши данные</h3>
   </div>
+    <form action="/add_candidate" enctype="multipart/form-data" method="POST">
+{% csrf_token %}
   <div class="border-t border-gray-200">
     <dl>
       <div class="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
@@ -43,6 +45,7 @@
       </div>
     </dl>
   </div>
+    </form>
 </div>
 </body>
 

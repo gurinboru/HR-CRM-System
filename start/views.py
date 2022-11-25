@@ -1,6 +1,5 @@
-import datetime
 import os
-
+from datetime import date
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.http import FileResponse
@@ -105,8 +104,8 @@ def addJobSeek(request):
         form = AddJobSeek(request.POST)
         if form.is_valid():
             cd = form.cleaned_data
-            jobSeek = JobSeek(job = Job.objects.get(cd['job']),
-            candidate = Candidate.objects.get(cd['job']),
+            jobSeek = JobSeek(job = Job.objects.get(name=cd['job']),
+            candidate = Candidate.objects.get(name=cd['candidate']),
             offer = cd['offer'],
             offer_definition = cd['offer_definition'],
             release_date = cd['release_date'],
@@ -120,20 +119,20 @@ def addJobSeek(request):
             meetemp_status = MeetEmpStatus.objects.get(status = cd['meetemp_status']),
             meetemp_status_defenition = cd['meetemp_status_defenition'])
             jobSeek.save()
-            ActionHistory(job_seek = jobSeek, action_name ='Изменение статуса Созвона с кандидатом',
-                          value_before = 'None',value_after =jobSeek.call_status.status, data = datetime.date,
-                              comment = cd['call_status_defenition'])
+            ActionHistory(job_seek = jobSeek, action_name ='Добавление статуса Созвона с кандидатом, всвязи с созданием нового отклика!',
+                          value_before = 'None',value_after =jobSeek.call_status.status, data = date.today(),
+                              comment = cd['call_status_defenition']).save()
 
-            ActionHistory(job_seek =jobSeek, action_name ='Изменение статуса Тестового задания',value_before = 'None',
-                          value_after = jobSeek.test_status.status, data = datetime.date, comment = cd['test_status_defenition'])
+            ActionHistory(job_seek =jobSeek, action_name ='Добавление статуса Тестового задания, всвязи с созданием нового отклика!',value_before = 'None',
+                          value_after = jobSeek.test_status.status, data = date.today(), comment = cd['test_status_defenition']).save()
 
-            ActionHistory(job_seek =jobSeek, action_name ='Изменение статуса Встречи с HR',value_before = 'None',
+            ActionHistory(job_seek =jobSeek, action_name ='Добавление статуса Встречи с HR, , всвязи с созданием нового отклика!',value_before = 'None',
                           value_after = jobSeek.meet_status.status,
-                               data = datetime.date, comment = cd['meet_status_defenition'])
+                               data = date.today(), comment = cd['meet_status_defenition']).save()
 
-            ActionHistory(job_seek =jobSeek, action_name ='Изменение статуса встречи с заказчиком',value_before = 'None',
+            ActionHistory(job_seek =jobSeek, action_name ='Добавление статуса встречи с заказчиком, , всвязи с созданием нового отклика!',value_before = 'None',
                           value_after = jobSeek.meetemp_status.status,
-                            data = datetime.date, comment = cd['meetemp_status_defenition'])
+                            data = date.today(), comment = cd['meetemp_status_defenition']).save()
             return redirect('/jobseek')
         else:
             messages.error(request, 'Заявка уже существует или введены неверные данные')
@@ -219,23 +218,23 @@ def changeJobSeek(request,pk):
 
             if jobSeek.call_status != CallStatus.objects.get(status = cd['call_status']):
                 ActionHistory(job_seek = jobSeek,action_name ='Изменение статуса Созвона с кандидатом',value_before = jobSeek.call_status.status,
-                              value_after = CallStatus.objects.get(status = cd['call_status']).status,data = datetime.date,
-                              comment = cd['call_status_defenition'])
+                              value_after = CallStatus.objects.get(status = cd['call_status']).status,data = date.today(),
+                              comment = cd['call_status_defenition']).save()
 
             if jobSeek.test_status != CallStatus.objects.get(status=cd['test_status']):
                 ActionHistory(job_seek = jobSeek, action_name ='Изменение статуса Тестового задания', value_before =jobSeek.test_status.status,
-                              value_after =CallStatus.objects.get(status=cd['test_status']).status, data = datetime.date,
-                              comment = cd['test_status_defenition'])
+                              value_after =CallStatus.objects.get(status=cd['test_status']).status, data = date.today(),
+                              comment = cd['test_status_defenition']).save()
 
             if jobSeek.meet_status != CallStatus.objects.get(status=cd['meet_status']):
                 ActionHistory(job_seek = jobSeek, action_name ='Изменение статуса Встречи с HR', value_before =jobSeek.meet_status.status,
-                              value_after =CallStatus.objects.get(status=cd['meet_status']).status, data = datetime.date,
-                              comment=cd['meet_status_defenition'])
+                              value_after =CallStatus.objects.get(status=cd['meet_status']).status, data = date.today(),
+                              comment=cd['meet_status_defenition']).save()
 
             if jobSeek.meetemp_status != CallStatus.objects.get(status=cd['meetemp_status']):
                 ActionHistory(job_seek = jobSeek, action_name ='Изменение статуса встречи с заказчиком', value_before =jobSeek.meetemp_status.status,
-                              value_after =CallStatus.objects.get(status=cd['meetemp_status']).status, data = datetime.date,
-                              comment = cd['meetemp_status_defenition'])
+                              value_after =CallStatus.objects.get(status=cd['meetemp_status']).status, data = date.today(),
+                              comment = cd['meetemp_status_defenition']).save()
 
             jobSeek.offer = cd['offer']
             jobSeek.offer_definition = cd['offer_definition']
@@ -280,7 +279,8 @@ def get_cv(request,pk):
     candidate = Candidate.objects.get(pk = pk)
     try:
         from django.http import FileResponse
-        return FileResponse(open(os.path.join(os.path.dirname(os.path.dirname(__file__)),candidate.cv.url), 'rb'), content_type='application/pdf')
+        pathHelp = os.path.join(os.path.dirname(os.path.dirname(__file__)), 'media/', candidate.cv.name)
+        return FileResponse(open(pathHelp, 'rb'))
     except FileNotFoundError:
         from django.http import Http404
         raise Http404()
