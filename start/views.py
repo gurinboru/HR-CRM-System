@@ -46,8 +46,10 @@ def getCerCandidate(request,pk):
 @login_required(login_url='/login')
 def getCerJob(request,pk):
     job = Job.objects.get(id = pk)
+    jobseek = JobSeek.objects.filter(job = job)
     content = {
-        "job" : job
+        "job" : job,
+        "jobseek": jobseek
     }
     return render(request, 'start/cerjob.html', content)
 
@@ -92,3 +94,12 @@ def addCandidate(request):
         "form":form
     }
     return render(request, 'start/add_candidate.html', content)
+
+# @login_required(login_url='/login')
+# def changeCandidate(request):
+#
+# @login_required(login_url='/login')
+# def changeJob(request):
+#
+# @login_required(login_url='/login')
+# def changeJobSeek(request):

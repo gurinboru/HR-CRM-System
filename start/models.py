@@ -100,7 +100,7 @@ class Job(models.Model):
     salary = models.IntegerField()
     expirence = models.IntegerField()
     employment = models.TextField()
-    definition = models.TextField()
+    definition = models.TextField(null=True)
     id_status = models.ForeignKey('StatusJob',on_delete=models.DO_NOTHING,db_column='id_status')
     user = models.ForeignKey(User,on_delete=models.DO_NOTHING)
 
@@ -139,15 +139,15 @@ class JobSeek(models.Model):
     offer = models.IntegerField()
     offer_definition = models.TextField()
     release_date = models.DateField()
-    denial_status = models.ForeignKey
-    call_tatus = models.ForeignKey('CallStatus',on_delete=models.DO_NOTHING, db_column='call_tatus')
-    call_tatus_defenition = models.TextField()
+    denial_status = models.ForeignKey('DenialStatus',on_delete=models.DO_NOTHING, db_column='denial_status')
+    call_status = models.ForeignKey('CallStatus',on_delete=models.DO_NOTHING, db_column='call_status')
+    call_status_defenition = models.TextField(null=True)
     test_status = models.ForeignKey('TestStatus',on_delete=models.DO_NOTHING, db_column='test_status')
-    test_status_defenition = models.TextField()
+    test_status_defenition = models.TextField(null=True)
     meet_status = models.ForeignKey('MeetStatus',on_delete=models.DO_NOTHING, db_column='meet_status')
-    meet_status_defenition = models.TextField()
+    meet_status_defenition = models.TextField(null=True)
     meetemp_status = models.ForeignKey('MeetEmpStatus',on_delete=models.DO_NOTHING, db_column='meetemp_status')
-    meetemp_status_defenition = models.TextField()
+    meetemp_status_defenition = models.TextField(null=True)
 
     class Meta:
         db_table = 'jobseek'
