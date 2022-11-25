@@ -1,20 +1,24 @@
 {% extends 'start/header.html' %}
 {% load static %}
 {% block content %}
-    <a class="btn btn-dark" href="/add_candidate" role="button">Добавить кандидата</a>
-
-    <div>
+    <body bgcolor="#76859B">
+        <div>
         {% for candidate in candidates %}
             <div class="card" style="width: 18rem;">
                 <img src="..." class="card-img-top" alt="...">
                 <div class="card-body">
                     <h5 class="card-title">{{ candidate.name }}</h5>
-{#                    <p class="card-text">{{ candidate.email }} . {{ candidate. }}</p>#}
+                    <p class="card-text">{{ candidate.email }}</p>
+                        {% for job in jobSeek %}
+                            <p class="card-text">{{ job.name }}</p>
+                        {% endfor %}
                     <a href="#" class="btn btn-primary">Go somewhere</a>
                 </div>
             </div>
         {% endfor %}
     </div>
+    <a class="btn btn-dark" href="/add_candidate" role="button">Добавить кандидата</a>
+    </body>
 {% endblock %}
 {% block title %}
 Кандидаты

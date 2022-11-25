@@ -4,46 +4,41 @@
 {% load static %}
 {% block content %}
 <body bgcolor="#76859B">
-    <form enctype="multipart/form-data" action="/add_candidate" method="post">
+    <form enctype="multipart/form-data" action="/add_job" method="post">
         {% csrf_token %}
         <div class="row d-flex justify-content-center align-items-center h-100">
             <div class="card rounded-3" style="width: 500px;">
                 <div class="card-body p-4 p-md-5">
-                    <h1 class="text-center h3 mb-3 fw-normal">Ваши данные</h1>
+                    <h1 class="text-center h3 mb-3 fw-normal">Данные вакансии</h1>
                     <form class="px-md-2">
                         <div class="form-outline mb-4">
-                            <label for="name">ФИО</label>
+                            <label for="name">Название вакансии</label>
                             {{form.name}}
                         </div>
 
                         <div class="form-outline mb-4">
-                            <label for="phone">Номер телефона</label>
-                            {{form.phone}}
+                            <label for="salary">Заработная плата</label>
+                            {{form.salary}}
                         </div>
 
                         <div class="form-outline mb-4">
-                            <label for="email">Email</label>
-                            {{form.email}}
+                            <label for="defenition">Описание вакансии</label>
+                            {{form.definition}}
                         </div>
 
                         <div class="form-outline mb-4">
-                            <label for="sex">Пол</label>
-                            {{form.sex}}
+                            <label for="expirence">Опыт работы</label>
+                            {{form.expirence}}
                         </div>
 
                         <div class="form-outline mb-4">
-                            <label for="birthdate">День рождения</label>
-                            {{form.birthdate}}
+                            <label for="employment">Занятость</label>
+                            {{form.employment}}
                         </div>
 
                         <div class="form-outline mb-4">
-                            <label for="photo">Фото</label>
-                               {{form.photo}}
-                        </div>
-
-                        <div class="form-outline mb-4">
-                            <label for="cv">Резюме</label>
-                            {{form.cv}}
+                            <label for="status">Статус вакансии</label>
+                            {{form.status}}
                         </div>
                         <button class="w-100 btn btn-primary" type="submit" >Сохранить вакансию</button>
                     </form>
@@ -55,5 +50,5 @@
 {% endblock %}
 </html>
 {% block title %}
-Добавить кандидата
+Добавить вакансию
 {% endblock %}

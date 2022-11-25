@@ -5,6 +5,8 @@ from .models import *
 from .forms import *
 
 def start(request):
+    if (request.user.is_authenticated):
+        return redirect('/candidates')
     return render(request, 'start/start.html')
 
 @login_required(login_url='/login')
@@ -64,15 +66,15 @@ def addJob(request):
         if form.is_valid():
             cd = form.cleaned_data
             Job(name = cd['name'], salary = cd['salary'], expirence = cd['expirence'], employment = cd['employment'], definition = cd['definition'],
-                      id_status = StatusJob.object.get(status = cd['status']), user = request.user).save()
+                      id_status = StatusJob.objects.get(status = cd['status']), user = request.user).save()
             return redirect('/jobs')
         else:
-            messages.error(request, 'Аккаунт уже существует или введены неверные данные')
+            messages.error(request, 'Вакансия уже существует или введены неверные данные')
     form = AddJobForm()
     content = {
         'form':form
     }
-    return render(request,'',content)
+    return render(request,'start/add_job.html',content)
 
 @login_required(login_url='/login')
 def addCandidate(request):
@@ -84,7 +86,7 @@ def addCandidate(request):
                       birthdate = cd['birthdate'], cv = cd['cv']).save()
             return redirect('/candidates')
         else:
-            messages.error(request, 'Аккаунт уже существует или введены неверные данные')
+            messages.error(request, 'Кандидат уже существует или введены неверные данные')
     form = AddCandidateForm()
     content = {
         "form":form
