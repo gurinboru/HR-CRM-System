@@ -4,7 +4,7 @@
 {% load static %}
 {% block content %}
 
-    <form  action="/add_candidate" method="post">
+    <form enctype="multipart/form-data" action="/add_candidate" method="post">
         {% csrf_token %}
         <div class="row d-flex justify-content-center align-items-center h-100">
             <div class="card rounded-3" style="width: 500px;">
@@ -13,37 +13,37 @@
                     <form class="px-md-2">
                         <div class="form-outline mb-4">
                             <label for="name">ФИО</label>
-                            <input type="text" class="form-control" name = "name" id="name" placeholder="ФИО">
+                            {{form.name}}
                         </div>
 
                         <div class="form-outline mb-4">
                             <label for="phone">Номер телефона</label>
-                            <input type="text" class="form-control" name = "phone" id="phone" placeholder="89.........">
+                            {{form.phone}}
                         </div>
 
                         <div class="form-outline mb-4">
                             <label for="email">Email</label>
-                            <input type="email" class="form-control" name = "email" id="email" placeholder="example@mail.ru">
+                            {{form.email}}
                         </div>
 
                         <div class="form-outline mb-4">
                             <label for="sex">Пол</label>
-                            <input type="text" class="form-control" name = "sex" id="sex" placeholder="Муж/жен">
+                            {{form.sex}}
                         </div>
 
                         <div class="form-outline mb-4">
                             <label for="birthdate">День рождения</label>
-                            <input type="text" class="form-control" name = "birthdate" id="birthdate" placeholder="01.01.1999">
+                            {{form.birthdate}}
                         </div>
 
                         <div class="form-outline mb-4">
                             <label for="photo">Фото</label>
-                            <input type="file" class="form-control" name = "photo" id="photo">
+                               {{form.photo}}
                         </div>
 
                         <div class="form-outline mb-4">
                             <label for="cv">Резюме</label>
-                            <input type="file" class="form-control" name = "cv" id="cv">
+                            {{form.cv}}
                         </div>
                         <button class="w-100 btn btn-primary" type="submit" >Сохранить данные кандидата</button>
                     </form>

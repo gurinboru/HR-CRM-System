@@ -1,17 +1,19 @@
 from django import forms
 from django.contrib.auth.models import User
-from .models import Job,StatusJob
+from django.forms import NumberInput
+
+from .models import Job,StatusJob,Candidate
 
 class AddCandidateForm(forms.Form):
-    name = forms.CharField(widget=forms.TextInput)
-    phone = forms.CharField(widget=forms.TextInput)
-    email = forms.EmailField(widget=forms.EmailInput)
-    sex = forms.CharField(widget=forms.TextInput)
-    photo = forms.FileField(widget=forms.FileInput)
-    birthdate = forms.DateField(widget=forms.DateInput)
-    cv = forms.FileField(widget=forms.FileInput)
+    name = forms.CharField(widget=forms.TextInput(attrs={"class":"form-control", "placeholder":"ФИО"}))
+    phone = forms.CharField(widget=forms.TextInput(attrs={"class":"form-control", "placeholder":"89........."}))
+    email = forms.EmailField(widget=forms.EmailInput(attrs={"class":"form-control", "placeholder":"example@mail.ru"}))
+    sex = forms.CharField(widget=forms.TextInput(attrs={"class":"form-control", "placeholder":"Муж/жен"}))
+    photo = forms.FileField(widget=forms.FileInput(attrs={"class":"form-control", "placeholder":"Фото"}))
+    birthdate = forms.DateField(widget=NumberInput(attrs={'type': 'date', "class":"form-control", "placeholder":"01.01.1999"}))
+    cv = forms.FileField(widget=forms.FileInput(attrs={"class":"form-control"}))
     class Meta:
-        model = User
+        model = Candidate
         fields = ('username', 'phone', 'email', 'sex', 'photo', 'birthdate', 'cv')
 
 class AddJobForm(forms.Form):

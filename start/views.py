@@ -1,3 +1,4 @@
+from django.contrib import messages
 from django.shortcuts import render, redirect
 from .models import *
 from .forms import *
@@ -56,6 +57,8 @@ def addJob(request):
             Job(name = cd['name'], salary = cd['salary'], expirence = cd['expirence'], employment = cd['employment'], definition = cd['definition'],
                       id_status = StatusJob.object.get(status = cd['status']), user = request.user).save()
             return redirect('/jobs')
+        else:
+            messages.error(request, 'Аккаунт уже существует или введены неверные данные')
     form = AddJobForm()
     content = {
         'form':form
@@ -64,8 +67,14 @@ def addJob(request):
 
 def addCandidate(request):
     if request.method == 'POST':
-        AddCandidateForm(request.POST).save()
-        return redirect('/candidates')
+        form = AddCandidateForm(request.POST,request.FILES)
+        if form.is_valid():
+            cd = form.cleaned_data
+            Candidate(name = cd['name'], phone = cd['phone'], email = cd['email'], sex = cd['sex'], photo = cd['photo'],
+                      birthdate = cd['birthdate'], cv = cd['cv']).save()
+            return redirect('/candidates')
+        else:
+            messages.error(request, 'Аккаунт уже существует или введены неверные данные')
     form = AddCandidateForm()
     content = {
         "form":form

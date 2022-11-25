@@ -3,6 +3,9 @@ from django.db import models
 
 
 # Статусы -----------------------------------------------
+from HR_CRM_System.settings import MEDIA_ROOT
+
+
 class DenialStatus(models.Model):
     CHOICES = (
         ('Активный', 'Активный'),
@@ -109,15 +112,21 @@ class Job(models.Model):
     # def save(self, *args, **kwargs):
     #     self.id_status = StatusJob.objects.get(pk=0)
     #     super().save(*args,**kwargs)
+def userCV_directory_path(instance, filename):
+    return 'candidate/CV/' + filename
+
+def userPhoto_directory_path(instance, filename):
+    # путь, куда будет осуществлена загрузка MEDIA_ROOT/user_<id>/<filename>
+    return 'candidate/photo/' + filename
 
 class Candidate(models.Model):
     name = models.TextField()
     phone = models.TextField()
     email = models.EmailField()
     sex = models.TextField()
-    photo = models.FileField()
+    photo = models.FileField(upload_to=userPhoto_directory_path)
     birthdate = models.DateField()
-    cv = models.FileField()
+    cv = models.FileField(upload_to=userCV_directory_path)
 
     class Meta:
         db_table = 'candidates'
