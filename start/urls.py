@@ -15,4 +15,5 @@ urlpatterns = [
     path('candidates', views.getCandidates),
     path('jobs', views.getJob),
     path('jobseek', views.getJobSeek),
+    path('get_cv/<int:pk>',views.get_cv)
 ]

@@ -237,3 +237,13 @@ def changeJobSeek(request,pk):
         "candidate": jobSeek
     }
     return render(request,'start/changeJobSeek.html',content)
+
+@login_required(login_url='/login')
+def get_cv(request,pk):
+    document = Candidate.objects.get(pk = pk)
+    try:
+        from django.http import FileResponse
+        return FileResponse(open(os.path.join(os.path.dirname(os.path.dirname(__file__)),document.document.name), 'rb'), content_type='application/pdf')
+    except FileNotFoundError:
+        from django.http import Http404
+        raise Http404()
