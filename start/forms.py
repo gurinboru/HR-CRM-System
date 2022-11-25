@@ -20,7 +20,6 @@ class AddJobForm(forms.Form):
     expirence = forms.IntegerField(widget=forms.NumberInput)
     employment = forms.CharField(widget=forms.TextInput)
     definition = forms.CharField(widget=forms.TextInput)
-    id_status = forms.CharField(widget=forms.TextInput)
 
     class Meta:
         model = Job

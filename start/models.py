@@ -71,6 +71,10 @@ class Job(models.Model):
         verbose_name = 'Job'
         verbose_name_plural = 'Jobs'
 
+    def save(self, *args, **kwargs):
+        self.id_status = StatusJob.object.get(pk=0)
+        super().save(*args,**kwargs)
+
 class Candidate(models.Model):
     name = models.TextField()
     phone = models.TextField()

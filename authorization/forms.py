@@ -10,6 +10,13 @@ class UserRegistrationForm(forms.ModelForm):
     password = forms.CharField(widget=forms.PasswordInput(attrs={ "class":"form-control reg_middle",  "minlength":"6", "id":"validationCustom03", "placeholder":"Password"}))
     password2 = forms.CharField(widget=forms.PasswordInput(attrs={ "class":"form-control", "id":"validationCustom04", "placeholder":"Confirm password"}))
     username = forms.CharField(widget=forms.TextInput(attrs={"class":"form-control", "pattern":"\D[^А-Яа-я ]{1,20}", "id":"validationCustom01", "placeholder":"loginexample" }))
+    email = forms.EmailField(widget=forms.EmailInput())
     class Meta:
         model = User
         fields = ('username', 'email')
+
+    def clean_password2(self):
+        cd = self.cleaned_data
+        if cd['password'] != cd['password2']:
+            raise forms.ValidationError('Passwords don\'t match.')
+        return cd['password2']
