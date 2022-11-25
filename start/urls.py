@@ -6,6 +6,7 @@ urlpatterns = [
     path('', views.start),
     path('candidates', views.getCandidates),
     path('add_candidate', views.addCandidate),
+    path('add_jobseek', views.addJobSeek),
     path('jobs',views.getJob),
     path('jobseek',views.getJobSeek),
     path('add_job', views.addJob),

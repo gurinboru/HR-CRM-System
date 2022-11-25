@@ -130,7 +130,7 @@ def addJobSeek(request):
     content = {
         "form":form
     }
-    return render(request, 'start/add_candidate.html', content)
+    return render(request, 'start/add_jobseek.html', content)
 
 @login_required(login_url='/login')
 def changeCandidate(request,pk):

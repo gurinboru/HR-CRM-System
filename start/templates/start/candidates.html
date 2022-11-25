@@ -2,11 +2,15 @@
 {% load static %}
 {% block content %}
     <body bgcolor="#76859B">
-        <a class="bg-green-500 hover:bg-green-700 text-white font-bold rounded py-3 px-3" href="/add_candidate" role="button">Добавить кандидата</a>
+    <div class="md:grid px-96 pt-4 ml-32">
+                <a href="/add_candidate">
+        <button class="h-8 bg-gray-800 hover:bg-gray-900 text-white text-sm font-medium hover:text-white pr-12 pl-12 hover:border-transparent rounded">Добавить кандидата</button>
+      </a>
+        </div>
         <div>
         {% for candidate in candidates %}
             <a href="cercandidate/{{ candidate.id }}">
-                <button class="col-span-6 sm:col-span-6 md:col-span-3 lg:col-span-2 xl:col-span-2 align-content-center">
+                <button class=" ml-20 col-span-6 sm:col-span-6 md:col-span-3 lg:col-span-2 xl:col-span-2 align-content-center">
                   <div class="bg-white shadow-lg hover:bg-gray-800 rounded-lg px-4 py-6 mx-4 my-4">
 {#                    <div class="mx-auto h-40 bg-gradient-to-r from-blue-300 via-green-100 to-pink-300 rounded-md rounded-md">{{ photo }}</div>#}
                       <img src="{{ candidate.photo.url }}" width="450" height="300">
@@ -20,6 +24,7 @@
             </a>
         {% endfor %}
         </div>
+
     </body>
 {% endblock %}
 {% block title %}

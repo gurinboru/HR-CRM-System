@@ -2,6 +2,11 @@
 {% load static %}
 {% block content %}
 <body bgcolor="#76859B">
+    <div class="md:grid px-0 pt-4 ml-8">
+      <a href="/add_jobseek">
+        <button class="h-8 bg-gray-800 hover:bg-gray-900 text-white text-sm font-medium hover:text-white pr-12 pl-12 hover:border-transparent rounded">Добавить отклик</button>
+      </a>
+        </div>
 {% for jobseekcer in jobSeek %}
 <div class="pt-6 pr-72 pl-72 overflow-hidden " style="background: #76859B">
     <dl>
@@ -22,7 +27,9 @@
         <dd class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">{{ jobseekcer.release_date }}</dd>
       </div>
       <div class="inset-y-0 right-0 pr-2 sm:pr-0 sm:pl-96 bg-gray-50 px-4 py-1 sm:grid-cols-3 sm:gap-4 sm:px-80  rounded-b-lg">
+        <a href="cerjobseek/{{ jobseekcer.id }}">
         <button class="h-8 bg-gray-800 hover:bg-gray-900 text-white text-sm font-medium hover:text-white px-16 pl-16 hover:border-transparent rounded">Посмотреть полностью</button>
+      </a>
       </div>
     </dl>
 
