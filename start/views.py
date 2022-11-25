@@ -18,25 +18,29 @@ def getJobSeek(request):
     content = {
         "jobSeek" : jobSeek
     }
-    return render(request, 'start/start.html',content)
+    return render(request, 'start/jobseek.html',content)
 
 def getCerJobSeek(request,pk):
     jobSeek = JobSeek.objects.get(id = pk)
     content = {
         "jobSeek" : jobSeek
     }
-
+    return render(request, 'start/cerjobseek.html', content)
 def getCerCandidate(request,pk):
     candidate = Candidate.objects.get(id = pk)
+    jobseek = JobSeek.objects.filter(candidate = candidate)
     content = {
-        "jobSeek" : candidate
+        "candidate" : candidate,
+        "jobseek":jobseek
     }
+    return render(request, 'start/cercandidate.html', content)
 
 def getCerJob(request,pk):
     job = Job.objects.get(id = pk)
     content = {
         "job" : job
     }
+    return render(request, 'start/cerjob.html', content)
 
 def getJob(request):
     jobs = Job.objects.all()
@@ -44,10 +48,6 @@ def getJob(request):
         "jobs" : jobs
     }
     return render(request, 'start/jobs.html',content)
-
-def addCurJobSeek(request):
-    if request.method == 'POST':
-        pass
 
 def addJob(request):
     if request.method == 'POST':
