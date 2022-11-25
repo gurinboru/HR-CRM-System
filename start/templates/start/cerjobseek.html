@@ -60,6 +60,11 @@
         <dt class="text-sm font-medium text-gray-500">Комментарий к встрече с заказчиком</dt>
         <dd class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">{{ jobSeek.meetemp_status_defenition }}</dd>
       </div>
+        <div>
+            {% for action in actionHistory %}
+                <div>{{ action.action_name }} {{ action.value_before }} {{ action.value_after }} {{ action.comment }}<br></div>
+            {% endfor %}
+        </div>
       <div class="inset-y-0 right-0 pr-2 sm:pr-0 sm:pl-96 bg-gray-50 px-4 py-1 sm:grid-cols-3 sm:gap-4 sm:px-80 rounded-b-lg">
         <a href="/change_jobseek/{{ jobSeek.id }}">
         <button class="h-8 bg-gray-800 hover:bg-gray-900 text-white text-sm font-medium hover:text-white px-16 pl-16 hover:border-transparent rounded">Изменить</button>

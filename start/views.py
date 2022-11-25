@@ -33,8 +33,10 @@ def getJobSeek(request):
 @login_required(login_url='/login')
 def getCerJobSeek(request,pk):
     jobSeek = JobSeek.objects.get(id = pk)
+    actionHistory = ActionHistory.objects.filter(job_seek=jobSeek)
     content = {
-        "jobSeek" : jobSeek
+        "jobSeek" : jobSeek,
+        "actionHistory" : actionHistory
     }
     return render(request, 'start/cerjobseek.html', content)
 
