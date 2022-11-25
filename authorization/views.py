@@ -1,7 +1,7 @@
 import django
 from django.contrib import messages
 from django.contrib.auth import authenticate, logout, login
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from .forms import LoginForm, UserRegistrationForm
 # Create your views here.
 def login(request):
@@ -13,7 +13,7 @@ def login(request):
             if user is not None:
                 if user.is_active:
                     django.contrib.auth.login(request, user)
-                    return render(request, 'start/candidates.html')
+                    return redirect('/candidates')
                 else:
                     messages.error(request, 'Disabled account')
                     # return render(request, 'login/login.html', context={"form": form})
