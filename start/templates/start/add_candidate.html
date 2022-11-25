@@ -1,64 +1,53 @@
-<!DOCTYPE html>
-<html lang="en">
 {% extends 'start/header.html' %}
 {% load static %}
 {% block content %}
 <body bgcolor="#76859B">
-    <form enctype="multipart/form-data" action="/add_candidate" method="post">
-        {% csrf_token %}
-        <div class="row d-flex justify-content-center align-items-center h-100">
-            <div class="card rounded-3" style="width: 500px;">
-                <div class="card-body p-4 p-md-5">
-                    <h1 class="text-center h3 mb-3 fw-normal">Ваши данные</h1>
-                    <form class="px-md-2">
-                        <div class="form-outline mb-4">
-                            <label for="name">ФИО</label>
-                            {{form.name}}
-                        </div>
-
-                        <div class="form-outline mb-4">
-                            <label for="phone">Номер телефона</label>
-                            {{form.phone}}
-                        </div>
-
-                        <div class="form-outline mb-4">
-                            <label for="position">Предполагаемая позиция</label>
-                            {{form.position}}
-                        </div>
-
-                        <div class="form-outline mb-4">
-                            <label for="email">Email</label>
-                            {{form.email}}
-                        </div>
-
-                        <div class="form-outline mb-4">
-                            <label for="sex">Пол</label>
-                            {{form.sex}}
-                        </div>
-
-                        <div class="form-outline mb-4">
-                            <label for="birthdate">День рождения</label>
-                            {{form.birthdate}}
-                        </div>
-
-                        <div class="form-outline mb-4">
-                            <label for="photo">Фото</label>
-                               {{form.photo}}
-                        </div>
-
-                        <div class="form-outline mb-4">
-                            <label for="cv">Резюме</label>
-                            {{form.cv}}
-                        </div>
-                        <button class="w-100 btn btn-primary" type="submit" >Сохранить вакансию</button>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </form>
+<div class="overflow-hidden mt-8 mr-8 ml-8 mb-8 bg-white shadow sm:rounded-lg">
+  <div class="px-4 py-5 sm:px-6">
+    <h3 class="text-lg font-medium leading-6 text-gray-900">Ваши данные</h3>
+  </div>
+  <div class="border-t border-gray-200">
+    <dl>
+      <div class="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+        <dt class="text-sm font-medium text-gray-500">ФИО</dt>
+        <dd class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">{{form.name}}</dd>
+      </div>
+      <div class="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+        <dt class="text-sm font-medium text-gray-500">Номер телефона</dt>
+        <dd class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">{{form.phone}}</dd>
+      </div>
+      <div class="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+        <dt class="text-sm font-medium text-gray-500">Предполагаемая позиция</dt>
+        <dd class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">{{form.position}}</dd>
+      </div>
+      <div class="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+        <dt class="text-sm font-medium text-gray-500">Email</dt>
+        <dd class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">{{form.email}}</dd>
+      </div>
+      <div class="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+        <dt class="text-sm font-medium text-gray-500">Пол</dt>
+        <dd class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">{{form.sex}}</dd>
+      </div>
+      <div class="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+        <dt class="text-sm font-medium text-gray-500">День рождения</dt>
+        <dd class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">{{form.birthdate}}</dd>
+      </div>
+        <div class="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+        <dt class="text-sm font-medium text-gray-500">Фото</dt>
+        <dd class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">{{form.photo}}</dd>
+      </div>
+              <div class="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+        <dt class="text-sm font-medium text-gray-500">Резюме</dt>
+        <dd class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">{{form.cv}}</dd>
+                <button type="submit" class="h-8 bg-gray-800 hover:bg-gray-900 text-white text-sm font-medium hover:text-white px-16 pl-16 hover:border-transparent rounded">Сохранить кандидата</button>
+      </div>
+    </dl>
+  </div>
+</div>
 </body>
+
+
 {% endblock %}
-</html>
 {% block title %}
 Добавить кандидата
 {% endblock %}

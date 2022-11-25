@@ -4,48 +4,40 @@
 {% load static %}
 {% block content %}
 <body bgcolor="#76859B">
-    <form enctype="multipart/form-data" action="/add_job" method="post">
-        {% csrf_token %}
-        <div class="row d-flex justify-content-center align-items-center h-100">
-            <div class="card rounded-3" style="width: 500px;">
-                <div class="card-body p-4 p-md-5">
-                    <h1 class="text-center h3 mb-3 fw-normal">Данные вакансии</h1>
-                    <form class="px-md-2">
-                        <div class="form-outline mb-4">
-                            <label for="name">Название вакансии</label>
-                            {{form.name}}
-                        </div>
-
-                        <div class="form-outline mb-4">
-                            <label for="salary">Заработная плата</label>
-                            {{form.salary}}
-                        </div>
-
-                        <div class="form-outline mb-4">
-                            <label for="defenition">Описание вакансии</label>
-                            {{form.definition}}
-                        </div>
-
-                        <div class="form-outline mb-4">
-                            <label for="expirence">Опыт работы</label>
-                            {{form.expirence}}
-                        </div>
-
-                        <div class="form-outline mb-4">
-                            <label for="employment">Занятость</label>
-                            {{form.employment}}
-                        </div>
-
-                        <div class="form-outline mb-4">
-                            <label for="status">Статус вакансии</label>
-                            {{form.status}}
-                        </div>
-                        <button class="w-100 btn btn-primary" type="submit" >Сохранить вакансию</button>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </form>
+<div class="overflow-hidden mt-8 mr-8 ml-8 mb-8 bg-white shadow sm:rounded-lg">
+  <div class="px-4 py-5 sm:px-6">
+    <h3 class="text-lg font-medium leading-6 text-gray-900">Данные вакансии</h3>
+  </div>
+  <div class="border-t border-gray-200">
+    <dl>
+      <div class="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+        <dt class="text-sm font-medium text-gray-500">Название вакансии</dt>
+        <dd class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">{{form.name}}</dd>
+      </div>
+      <div class="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+        <dt class="text-sm font-medium text-gray-500">Заработная плата</dt>
+        <dd class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">{{form.salary}}</dd>
+      </div>
+      <div class="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+        <dt class="text-sm font-medium text-gray-500">Описание вакансии</dt>
+        <dd class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">{{form.definition}}</dd>
+      </div>
+      <div class="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+        <dt class="text-sm font-medium text-gray-500">Опыт работы</dt>
+        <dd class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">{{form.expirence}}</dd>
+      </div>
+      <div class="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+        <dt class="text-sm font-medium text-gray-500">Занятость</dt>
+        <dd class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">{{form.employment}}</dd>
+      </div>
+      <div class="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+        <dt class="text-sm font-medium text-gray-500">Статус вакансии</dt>
+        <dd class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">{{form.status}}</dd>
+           <button type="submit" class="h-8 bg-gray-800 hover:bg-gray-900 text-white text-sm font-medium hover:text-white px-16 pl-16 hover:border-transparent rounded">Сохранить вакансию</button>
+      </div>
+    </dl>
+  </div>
+</div>
 </body>
 {% endblock %}
 </html>
