@@ -1,8 +1,34 @@
 {% extends 'start/header.html' %}
 {% load static %}
 {% block content %}
+<body bgcolor="#76859B">
+{% for jobseekcer in jobSeek %}
+<div class="pt-6 pr-72 pl-72 overflow-hidden " style="background: #76859B">
+    <dl>
+      <div class="bg-gray-50 px-4 py-1 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6 rounded-t-lg">
+        <dt class="text-sm font-medium text-gray-500">Вакансия</dt>
+        <dd class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">{{ jobseekcer.job.name }}</dd>
+      </div>
+      <div class="bg-white px-4 py-1 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+        <dt class="text-sm font-medium text-gray-500">Кандидат</dt>
+        <dd class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">{{ jobseekcer.candidate.name }}</dd>
+      </div>
+      <div class="bg-gray-50 px-4 py-1 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+        <dt class="text-sm font-medium text-gray-500">Оффер</dt>
+        <dd class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">{{ jobseekcer.offer }} руб.</dd>
+      </div>
+      <div class="bg-white px-4 py-1 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+        <dt class="text-sm font-medium text-gray-500">Дата выхода</dt>
+        <dd class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">{{ jobseekcer.release_date }}</dd>
+      </div>
+      <div class="inset-y-0 right-0 pr-2 sm:pr-0 sm:pl-96 bg-gray-50 px-4 py-1 sm:grid-cols-3 sm:gap-4 sm:px-80  rounded-b-lg">
+        <button class="h-8 bg-gray-800 hover:bg-gray-900 text-white text-sm font-medium hover:text-white px-16 pl-16 hover:border-transparent rounded">Посмотреть полностью</button>
+      </div>
+    </dl>
 
-
+</div>
+{% endfor %}
+</body>
 {% endblock %}
 {% block title %}
 Отклики на вакансии
