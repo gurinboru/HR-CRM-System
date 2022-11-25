@@ -61,5 +61,6 @@ def addJob(request):
     return render(request,'',content)
 
 def addCandidate(request):
+    render(request, 'start/add_candidate.html')
     if request.method == 'POST':
         pass

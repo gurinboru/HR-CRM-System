@@ -13,7 +13,7 @@ def login(request):
             if user is not None:
                 if user.is_active:
                     django.contrib.auth.login(request, user)
-                    return render(request, 'start/header.html')
+                    return render(request, 'start/candidates.html')
                 else:
                     messages.error(request, 'Disabled account')
                     # return render(request, 'login/login.html', context={"form": form})
@@ -33,7 +33,7 @@ def registration_user(request):
             new_user.is_active = True
             new_user.save()
             login(request, new_user)
-            return render(request, 'start/start.html')
+            return render(request, 'start/candidates.html')
         else:
             messages.error(request, 'Аккаунт уже существует или введены неверные данные')
         return render(request, 'authentication/registration.html', context={"form": user_form})
