@@ -7,45 +7,44 @@
 </head>
 
 <body>
-<div class="wrapper">
-    <div class="title">
-      Регистрация
-    </div>
-    <div class="form">
-       <div class="inputfield">
-          <label>Фамилия</label>
-          <input type="text" class="input">
-       </div>  
-        <div class="inputfield">
-          <label>Имя</label>
-          <input type="text" class="input">
-       </div>
-        <div class="inputfield">
-          <label>Отчество</label>
-          <input type="text" class="input">
-       </div>
+<form action="/registration" method="post">
+    {% csrf_token %}
+    <div class="wrapper">
+        <div class="title">
+          Регистрация
+        </div>
+        <div class="form">
+           <div class="inputfield">
+              <label>Фамилия</label>
+              {{form.last_name}}
+           </div>
+            <div class="inputfield">
+              <label>Имя</label>
+              {{form.first_name}}
+           </div>
+            <div class="inputfield">
+              <label>UserName</label>
+              {{form.username}}
+           </div>
 
-        <div class="inputfield">
-          <label>Email</label>
-          <input type="text" class="input">
-       </div> 
-      <div class="inputfield">
-          <label>Номер телефона</label>
-          <input type="text" class="input">
-       </div>
-         <div class="inputfield">
-          <label>Пароль</label>
-          <input type="password" class="input">
-       </div>
-      <div class="inputfield">
-          <label>Подтвердите пароль</label>
-          <input type="password" class="input">
-       </div>
+            <div class="inputfield">
+              <label>Email</label>
+              {{form.email}}
+           </div>
+             <div class="inputfield">
+              <label>Пароль</label>
+              {{form.password}}
+           </div>
+          <div class="inputfield">
+              <label>Подтвердите пароль</label>
+              {{form.password2}}
+           </div>
 
-      <div class="inputfield">
-        <input type="submit" value="Зарегистрироваться" class="btn">
-      </div>
+          <div class="inputfield">
+            <input type="submit" value="Зарегистрироваться" class="btn">
+          </div>
+        </div>
     </div>
-</div>
+</form>
 </body>
 </html>

@@ -1,5 +1,6 @@
+import django
 from django.contrib import messages
-from django.contrib.auth import authenticate, logout
+from django.contrib.auth import authenticate, logout, login
 from django.shortcuts import render
 from .forms import LoginForm, UserRegistrationForm
 # Create your views here.
@@ -11,7 +12,7 @@ def login(request):
             user = authenticate(username=cd['username'], password=cd['password'])
             if user is not None:
                 if user.is_active:
-                    login(request, user)
+                    django.contrib.auth.login(request, user)
                     return render(request, 'start/start.html')
                 else:
                     messages.error(request, 'Disabled account')

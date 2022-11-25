@@ -7,6 +7,8 @@
 </head>
 
 <body>
+<form action="/login" method="POST">
+{% csrf_token %}
 <div class="wrapper">
     <div class="title">
       Войти
@@ -14,13 +16,13 @@
     <div class="form">
 
         <div class="inputfield">
-          <label>Email</label>
-          <input type="text" class="input">
+          <label>Username</label>
+          {{form.username}}
        </div> 
 
          <div class="inputfield">
           <label>Пароль</label>
-          <input type="password" class="input">
+             {{form.password}}
        </div>
 
       <div class="inputfield">
@@ -28,5 +30,6 @@
       </div>
     </div>
 </div>
+</form>
 </body>
 </html>
