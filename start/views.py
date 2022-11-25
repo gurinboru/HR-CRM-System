@@ -64,8 +64,7 @@ def addJob(request):
 
 def addCandidate(request):
     render(request, 'start/add_candidate.html')
-    if request.method == 'POST':
+    if request.method == 'GET':
+        return render(request, 'start/add_candidate.html')
+    elif request.method == 'POST':
         pass
-
-def add_candidate(request):
-    return render(request, 'start/add_candidate.html')
