@@ -10,7 +10,7 @@ def getCandidates(request):
     content = {
         "candidates" : candidates
     }
-    return render(request, 'start/start.html',content)
+    return render(request, 'start/header.html',content)
 
 def getJobSeek(request):
     jobSeek = JobSeek.objects.all()
