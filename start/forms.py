@@ -21,6 +21,16 @@ class AddJobForm(forms.Form):
     employment = forms.CharField(widget=forms.TextInput)
     definition = forms.CharField(widget=forms.TextInput)
 
-    class Meta:
-        model = Job
-        fields = ('name', 'salary', 'expirence', 'employment', 'definition', 'id_status', 'user')
+    # class Meta:
+    #     model = Job
+    #     fields = ('name', 'salary', 'expirence', 'employment', 'definition')
+
+class AddJobForm(forms.Form):
+    name = forms.CharField(widget=forms.TextInput)
+    salary = forms.IntegerField(widget=forms.NumberInput)
+    expirence = forms.IntegerField(widget=forms.NumberInput)
+    employment = forms.CharField(widget=forms.TextInput)
+    definition = forms.CharField(widget=forms.TextInput)
+        # class Meta:
+        #     model = Job
+        #     fields = ('name', 'salary', 'expirence', 'employment', 'definition', 'id_status', 'user')

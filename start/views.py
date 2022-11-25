@@ -52,7 +52,9 @@ def addJob(request):
     if request.method == 'POST':
         form = AddJobForm(request.POST)
         if form.is_valid():
-            form.save(commit=False)
+            cd = form.cleaned_data
+            job = Job(name = cd['name'], salary = cd['salary'], expirence = cd['expirence'], employment = cd['employment'], definition = cd['definition'],
+                      id_status = StatusJob.object.get())
             return redirect('/jobs')
     form = AddJobForm()
     content = {
@@ -61,6 +63,7 @@ def addJob(request):
     return render(request,'',content)
 
 def addCandidate(request):
+    render(request, 'start/add_candidate.html')
     if request.method == 'POST':
         pass
 

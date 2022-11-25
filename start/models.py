@@ -4,7 +4,13 @@ from django.db import models
 
 # Статусы -----------------------------------------------
 class DenialStatus(models.Model):
-    status = models.TextField()
+    CHOICES = (
+        (0, 'Активный'),
+        (1, 'Отказ рекрутёра'),
+        (2, 'Отказ соискателя'),
+        (3, 'Отказ заказчика'),
+    )
+    status = models.CharField(choices=CHOICES, max_length=300)
 
     class Meta:
         db_table = 'denialStatus'
@@ -12,7 +18,12 @@ class DenialStatus(models.Model):
         verbose_name_plural = 'DenialStatus'
 
 class CallStatus(models.Model):
-    status = models.TextField()
+    CHOICES = (
+        (0, 'Состоялось'),
+        (1, 'Перезвонить'),
+        (2, 'Недозвон')
+    )
+    status = models.CharField(choices=CHOICES, max_length=300)
 
     class Meta:
         db_table = 'callStatus'
@@ -21,7 +32,12 @@ class CallStatus(models.Model):
 
 
 class MeetStatus(models.Model):
-    status = models.TextField()
+    CHOICES = (
+        (0, 'Запланировано'),
+        (1, 'Состоялось'),
+        (2, 'Не состоялось')
+    )
+    status = models.CharField(choices=CHOICES, max_length=300)
 
     class Meta:
         db_table = 'meetStatus'
@@ -30,7 +46,12 @@ class MeetStatus(models.Model):
 
 
 class MeetEmpStatus(models.Model):
-    status = models.TextField()
+    CHOICES = (
+        (0, 'Состоялось'),
+        (1, 'Перезвонить'),
+        (2, 'Недозвон')
+    )
+    status = models.CharField(choices=CHOICES, max_length=300)
 
     class Meta:
         db_table = 'meetEmpStatus'
@@ -39,7 +60,13 @@ class MeetEmpStatus(models.Model):
 
 
 class TestStatus(models.Model):
-    status = models.TextField()
+    CHOICES = (
+        (0, 'В работе'),
+        (1, 'Не выполнено'),
+        (2, 'Отказ от выполнения'),
+        (3, 'Выполнено'),
+    )
+    status = models.CharField(choices=CHOICES, max_length=300)
 
     class Meta:
         db_table = 'testStatus'
@@ -47,7 +74,12 @@ class TestStatus(models.Model):
         verbose_name_plural = 'TestStatus'
 
 class StatusJob(models.Model):
-    status = models.TextField()
+    CHOICES = (
+        ('Открыта', 'Открыта'),
+        ('Закрыта', 'Закрыта'),
+        ('Заморожена', 'Заморожена')
+    )
+    status = models.CharField(choices=CHOICES, max_length=300)
 
     class Meta:
         db_table = 'statusjob'
@@ -62,7 +94,7 @@ class Job(models.Model):
     salary = models.IntegerField()
     expirence = models.IntegerField()
     employment = models.TextField()
-    definition = models.TextField()
+    # definition = models.TextField()
     id_status = models.ForeignKey('StatusJob',on_delete=models.DO_NOTHING,db_column='id_status')
     user = models.ForeignKey(User,on_delete=models.DO_NOTHING)
 
@@ -71,9 +103,9 @@ class Job(models.Model):
         verbose_name = 'Job'
         verbose_name_plural = 'Jobs'
 
-    def save(self, *args, **kwargs):
-        self.id_status = StatusJob.object.get(pk=0)
-        super().save(*args,**kwargs)
+    # def save(self, *args, **kwargs):
+    #     self.id_status = StatusJob.objects.get(pk=0)
+    #     super().save(*args,**kwargs)
 
 class Candidate(models.Model):
     name = models.TextField()
@@ -97,9 +129,14 @@ class JobSeek(models.Model):
     release_date = models.DateField()
     denial_status = models.ForeignKey
     call_tatus = models.ForeignKey('CallStatus',on_delete=models.DO_NOTHING, db_column='call_tatus')
+    call_tatus_defenition = models.TextField()
     test_status = models.ForeignKey('TestStatus',on_delete=models.DO_NOTHING, db_column='test_status')
+    test_status_defenition = models.TextField()
     meet_status = models.ForeignKey('MeetStatus',on_delete=models.DO_NOTHING, db_column='meet_status')
+    meet_status_defenition = models.TextField()
     meetemp_status = models.ForeignKey('MeetEmpStatus',on_delete=models.DO_NOTHING, db_column='meetemp_status')
+    meetemp_status_defenition = models.TextField()
+
     class Meta:
         db_table = 'jobseek'
         verbose_name = 'JobSeek'

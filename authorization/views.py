@@ -44,4 +44,4 @@ def registration_user(request):
 def user_logout(request):
     logout(request)
     form = LoginForm()
-    return render(request, 'authentication/login.html', context={"form": form})
+    return redirect('/login')
