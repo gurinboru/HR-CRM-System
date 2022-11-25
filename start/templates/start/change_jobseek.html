@@ -1,7 +1,7 @@
 {% extends 'start/header.html' %}
 {% load static %}
 {% block content %}
-<body>
+<body bgcolor="#76859B">
 <form  action="/change_jobseek/{{ jobSeek.id }}" method="POST">
     {% csrf_token %}
     <div class="pt-6 pr-72 pl-72 pb-6 overflow-hidden " style="background: #76859B">
