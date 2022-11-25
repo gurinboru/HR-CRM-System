@@ -100,7 +100,7 @@ class Job(models.Model):
     salary = models.IntegerField()
     expirence = models.IntegerField()
     employment = models.TextField()
-    # definition = models.TextField()
+    definition = models.TextField()
     id_status = models.ForeignKey('StatusJob',on_delete=models.DO_NOTHING,db_column='id_status')
     user = models.ForeignKey(User,on_delete=models.DO_NOTHING)
 
