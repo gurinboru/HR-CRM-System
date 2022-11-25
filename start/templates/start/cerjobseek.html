@@ -1,0 +1,75 @@
+{% extends 'start/header.html' %}
+{% load static %}
+{% block content %}
+<body bgcolor="#76859B">
+<div class="pt-6 pr-72 pl-72 pb-6 overflow-hidden " style="background: #76859B">
+    <dl>
+      <div class="bg-gray-50 px-4 py-3 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6 rounded-t-lg">
+        <dt class="text-sm font-medium text-gray-500">Вакансия</dt>
+        <dd class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">{{ jobSeek.job.name }}</dd>
+      </div>
+      <div class="bg-white px-4 py-3 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+        <dt class="text-sm font-medium text-gray-500">Кандидат</dt>
+        <dd class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">{{ jobSeek.candidate.name }}</dd>
+      </div>
+      <div class="bg-gray-50 px-4 py-3 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+        <dt class="text-sm font-medium text-gray-500">Оффер</dt>
+        <dd class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">{{ jobSeek.offer }} руб.</dd>
+      </div>
+      <div class="bg-white px-4 py-3 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+        <dt class="text-sm font-medium text-gray-500">Комментарий к офферу</dt>
+        <dd class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">{{ jobSeek.offer_definition }}</dd>
+      </div>
+      <div class="bg-gray-50 px-4 py-3 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+        <dt class="text-sm font-medium text-gray-500">Статус отказа</dt>
+        <dd class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">{{ jobSeek.denial_status.status }}</dd>
+      </div>
+        <div class="bg-white px-4 py-3 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+        <dt class="text-sm font-medium text-gray-500">Дата выхода</dt>
+        <dd class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">{{ jobSeek.release_date }}</dd>
+      </div>
+        <div class="bg-gray-50 px-4 py-3 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+        <dt class="text-sm font-medium text-gray-500">Статус звонка</dt>
+        <dd class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">{{ jobSeek.call_status.status }}</dd>
+      </div>
+      <div class="bg-white px-4 py-3 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+        <dt class="text-sm font-medium text-gray-500">Комментарий к звонку</dt>
+        <dd class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">{{ jobSeek.call_status_defenition }}</dd>
+      </div>
+      <div class="bg-gray-50 px-4 py-3 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+        <dt class="text-sm font-medium text-gray-500">Статус тестового задания</dt>
+        <dd class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">{{ jobSeek.test_status.status }}</dd>
+      </div>
+      <div class="bg-white px-4 py-3 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+        <dt class="text-sm font-medium text-gray-500">Комментарий к тестовому заданию</dt>
+        <dd class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">{{ jobSeek.test_status_defenition }}</dd>
+      </div>
+      <div class="bg-gray-50 px-4 py-3 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+        <dt class="text-sm font-medium text-gray-500">Статус встречи с HR</dt>
+        <dd class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">{{ jobSeek.meet_status.status }}</dd>
+      </div>
+      <div class="bg-white px-4 py-3 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+        <dt class="text-sm font-medium text-gray-500">Комментарий к тестовому заданию</dt>
+        <dd class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">{{ jobSeek.meet_status_defenition }}</dd>
+      </div>
+      <div class="bg-gray-50 px-4 py-3 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+        <dt class="text-sm font-medium text-gray-500">Статус встречи с заказчиком</dt>
+        <dd class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">{{ jobSeek.meetemp_status.status }}</dd>
+      </div>
+      <div class="bg-white px-4 py-3 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+        <dt class="text-sm font-medium text-gray-500">Комментарий к встрече с заказчиком</dt>
+        <dd class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">{{ jobSeek.meetemp_status_defenition }}</dd>
+      </div>
+      <div class="inset-y-0 right-0 pr-2 sm:pr-0 sm:pl-96 bg-gray-50 px-4 py-1 sm:grid-cols-3 sm:gap-4 sm:px-80 rounded-b-lg">
+        <a href="#">
+        <button class="h-8 bg-gray-800 hover:bg-gray-900 text-white text-sm font-medium hover:text-white px-16 pl-16 hover:border-transparent rounded">Изменить</button>
+      </a>
+      </div>
+    </dl>
+
+</div>
+</body>
+{% endblock %}
+{% block title %}
+Отклики на вакансии
+{% endblock %}
