@@ -290,6 +290,10 @@ def get_cv(request,pk):
         raise Http404()
 
 @login_required(login_url='/login')
+def parser(request):
+    return render(request, 'start/parser.html')
+
+@login_required(login_url='/login')
 def parseHTML(request):
     from bs4 import BeautifulSoup
     from lxml import html
@@ -307,4 +311,3 @@ def parseHTML(request):
         email = soup.find('div', {'data-qa': 'resume-contact-email'}).text
         Candidate(name = name, sex = gender, phone = phone, email = email , position = position, birthdate = date.today() - relativedelta(years=int(age)), cv = file).save()
         pass
-
