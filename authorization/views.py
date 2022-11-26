@@ -32,7 +32,7 @@ def registration_user(request):
             new_user.set_password(user_form.cleaned_data['password'])
             new_user.is_active = True
             new_user.save()
-            login(request, new_user)
+            django.contrib.auth.login(request, new_user)
             return render(request, 'start/candidates.html')
         else:
             messages.error(request, 'Аккаунт уже существует или введены неверные данные')

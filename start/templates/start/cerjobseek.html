@@ -78,7 +78,7 @@
 			<div class="flex flex-col bg-white fit-content bg-white">
 				<div class="fit-content overflow-y-auto flex-grow p-4 " style="max-height:calc(60vh - 56px)">
                   {% for action in actionHistory %}
-					<p>{{ action.action_name }}: с {{ action.value_before }} на {{ action.value_after }}</p>
+					<p>{{ action.action_name }}: с {{ action.value_before }} на {{ action.value_after }}  --> [Комментарий: {{ action.comment }}]</p>
                   {% endfor %}
 				</div>
 			</div>

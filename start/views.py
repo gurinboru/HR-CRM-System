@@ -154,16 +154,16 @@ def changeCandidate(request,pk):
         form = AddCandidateForm(request.POST,request.FILES)
         if form.is_valid():
             cd = form.cleaned_data
-            if (cd['photo'] == None):
-                cd['photo'] = File(open('anonymos.jpeg', 'rb'))
+            if (cd['photo'] != None):
+                candidate.photo=cd['photo']
+            if (cd['cv'] != None):
+                candidate.cv=cd['cv']
             candidate.name=cd['name']
             candidate.phone=cd['phone']
             candidate.email=cd['email']
             candidate.sex=cd['sex']
             candidate.position = cd['position']
-            candidate.photo=cd['photo']
             candidate.birthdate=cd['birthdate']
-            candidate.cv=cd['cv']
             candidate.save()
             return redirect('cercandidate', pk=candidate.id)
         else:

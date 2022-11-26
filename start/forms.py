@@ -12,7 +12,7 @@ class AddCandidateForm(forms.Form):
     position = forms.CharField(widget=forms.TextInput(attrs={"class":"form-control", "placeholder":"Разработчик"}),required=True)
     photo = forms.ImageField(widget=forms.FileInput(attrs={"class":"form-control", "placeholder":"Фото"}),required=False)
     birthdate = forms.DateField(widget=NumberInput(attrs={'type': 'date', "class":"form-control", "placeholder":"01.01.1999"}),required=True)
-    cv = forms.FileField(widget=forms.FileInput(attrs={"class":"form-control"}),required=True)
+    cv = forms.FileField(widget=forms.FileInput(attrs={"class":"form-control"}),required=False)
     class Meta:
         model = Candidate
         fields = ('username', 'phone', 'email', 'sex', 'photo', 'birthdate', 'cv')
@@ -24,9 +24,6 @@ class AddJobForm(forms.Form):
     employment = forms.CharField(widget=forms.TextInput(attrs={"placeholder":"Полная/частичная"}),required=True)
     definition = forms.CharField(widget=forms.TextInput(attrs={"placeholder":"..."}),required=True)
     status = forms.ChoiceField(choices = StatusJob.CHOICES,required=True)
-        # class Meta:
-        #     model = Job
-        #     fields = ('name', 'salary', 'expirence', 'employment', 'definition', 'id_status', 'user')
 
 class AddJobSeek(forms.Form):
     job = forms.ModelChoiceField(queryset=Job.objects.all(),required=True)
