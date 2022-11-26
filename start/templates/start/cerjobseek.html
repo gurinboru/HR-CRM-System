@@ -61,8 +61,12 @@
         <dd class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">{{ jobSeek.meetemp_status_defenition }}</dd>
       </div>
         <div>
+          <div class="bg-gray-50 px-4 py-3 sm:grid sm:grid-cols-1 sm:gap-4 sm:px-6">
+              <dt class="text-l font-medium text-black-500">История</dt>
             {% for action in actionHistory %}
-                <div>{{ action.action_name }} {{ action.value_before }} {{ action.value_after }} {{ action.comment }}<br></div>
+              <dd class="mt-1 text-sm text-gray-900 sm:col-span-3 sm:mt-0">
+
+                {{ action.action_name }} <button class="ml-102 mr-96 border-2 border-red-500 p-2 text-red-500  rounded-lg flex"> {{ action.value_before }} </button><button class="ml-102 mr-96 border-2 border-green-500 p-2 text-green-500  rounded-lg flex">{{ action.value_after }} </button>{{ action.comment }}<br></dd>
             {% endfor %}
         </div>
       <div class="inset-y-0 right-0 pr-2 sm:pr-0 sm:pl-96 bg-gray-50 px-4 py-1 sm:grid-cols-3 sm:gap-4 sm:px-80 rounded-b-lg">
