@@ -4,8 +4,6 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.core.files import File
 from django.shortcuts import render, redirect
-
-from .models import *
 from .forms import *
 
 def start(request):
@@ -91,6 +89,9 @@ def addCandidate(request):
         form = AddCandidateForm(request.POST,request.FILES)
         if form.is_valid():
             cd = form.cleaned_data
+            if (cd['photo'] == None):
+                file = File(open('anonymos.jpeg', 'rb'))
+                cd['photo'] = file
             Candidate(name = cd['name'], phone = cd['phone'], email = cd['email'], sex = cd['sex'],
                       position = cd['position'], photo = cd['photo'], birthdate = cd['birthdate'], cv = cd['cv']).save()
             return redirect('/candidates')
@@ -153,6 +154,8 @@ def changeCandidate(request,pk):
         form = AddCandidateForm(request.POST,request.FILES)
         if form.is_valid():
             cd = form.cleaned_data
+            if (cd['photo'] == None):
+                cd['photo'] = File(open('anonymos.jpeg', 'rb'))
             candidate.name=cd['name']
             candidate.phone=cd['phone']
             candidate.email=cd['email']
@@ -171,7 +174,7 @@ def changeCandidate(request,pk):
         "email": candidate.email,
         "sex": candidate.sex,
         "position" : candidate.position,
-        "photo": candidate.phone,
+        "photo": candidate.photo,
         "birthdate": candidate.birthdate,
         "cv": candidate.cv
     })
@@ -314,7 +317,7 @@ def parseHTML(request):
                 position = soup.find('span', {'data-qa': 'resume-block-title-position'}).text
                 salary = soup.find('span', {'data-qa': 'resume-block-salary'}).text.replace('руб', '').replace('.','')
                 email = soup.find('div', {'data-qa': 'resume-contact-email'}).text
-                photo = File(open('media/candidate/photo/anonymos.jpeg', 'rb'))
+                photo = File(open('anonymos.jpeg', 'rb'))
                 Candidate(name = name, sex = gender, phone = phone, email = email , position = position,
                           birthdate = date.today() - relativedelta(years=int(age)), photo=photo, cv = file).save()
         return redirect('/candidates')
