@@ -2,9 +2,8 @@ import os
 from datetime import date
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-from django.http import FileResponse
+from django.core.files import File
 from django.shortcuts import render, redirect
-from django.views.decorators.csrf import csrf_exempt
 
 from .models import *
 from .forms import *
@@ -33,7 +32,7 @@ def getJobSeek(request):
 @login_required(login_url='/login')
 def getCerJobSeek(request,pk):
     jobSeek = JobSeek.objects.get(id = pk)
-    actionHistory = ActionHistory.objects.filter(job_seek=jobSeek)
+    actionHistory = ActionHistory.objects.filter(job_seek=jobSeek).order_by('-id')
     content = {
         "jobSeek" : jobSeek,
         "actionHistory" : actionHistory
@@ -74,8 +73,9 @@ def addJob(request):
         form = AddJobForm(request.POST)
         if form.is_valid():
             cd = form.cleaned_data
-            Job(name = cd['name'], salary = cd['salary'], expirence = cd['expirence'], employment = cd['employment'], definition = cd['definition'],
-                      id_status = StatusJob.objects.get(status = cd['status']), user = request.user).save()
+            Job(name = cd['name'], salary = cd['salary'], expirence = cd['expirence'], employment = cd['employment'],
+                definition = cd['definition'], id_status = StatusJob.objects.get(status = cd['status']),
+                user = request.user).save()
             return redirect('/jobs')
         else:
             messages.error(request, 'Вакансия уже существует или введены неверные данные')
@@ -91,8 +91,8 @@ def addCandidate(request):
         form = AddCandidateForm(request.POST,request.FILES)
         if form.is_valid():
             cd = form.cleaned_data
-            Candidate(name = cd['name'], phone = cd['phone'], email = cd['email'], sex = cd['sex'], position = cd['position'], photo = cd['photo'],
-                      birthdate = cd['birthdate'], cv = cd['cv']).save()
+            Candidate(name = cd['name'], phone = cd['phone'], email = cd['email'], sex = cd['sex'],
+                      position = cd['position'], photo = cd['photo'], birthdate = cd['birthdate'], cv = cd['cv']).save()
             return redirect('/candidates')
         else:
             messages.error(request, 'Кандидат уже существует или введены неверные данные')
@@ -291,23 +291,30 @@ def get_cv(request,pk):
 
 @login_required(login_url='/login')
 def parser(request):
-    return render(request, 'start/parser.html')
+    form = UploadHTMLFile()
+    content = {
+        'form': form
+    }
+    return render(request, 'start/parser.html', content)
 
 @login_required(login_url='/login')
 def parseHTML(request):
     from bs4 import BeautifulSoup
     from lxml import html
     from dateutil.relativedelta import relativedelta
-    for files in request.FILES:
-        file = request.FILES.get(files)
-        contents = file.read()
-        soup = BeautifulSoup(contents, 'lxml')
-        name = soup.find('h2', {'data-qa': 'resume-personal-name'}).text
-        gender = soup.find('span', {'data-qa': 'resume-personal-gender'}).text
-        age = soup.find('span', {'data-qa': 'resume-personal-age'}).text.split()[0]
-        phone = soup.find('span', {'data-qa': 'resume-contact-preferred'}).text
-        position = soup.find('span', {'data-qa': 'resume-block-title-position'}).text
-        salary = soup.find('span', {'data-qa': 'resume-block-salary'}).text.replace('руб', '').replace('.','')
-        email = soup.find('div', {'data-qa': 'resume-contact-email'}).text
-        Candidate(name = name, sex = gender, phone = phone, email = email , position = position, birthdate = date.today() - relativedelta(years=int(age)), cv = file).save()
-        pass
+    if request.method=='POST':
+        for files in request.FILES:
+                file = request.FILES.get(files)
+                contents = file.read()
+                soup = BeautifulSoup(contents, 'lxml')
+                name = soup.find('h2', {'data-qa': 'resume-personal-name'}).text
+                gender = soup.find('span', {'data-qa': 'resume-personal-gender'}).text
+                age = soup.find('span', {'data-qa': 'resume-personal-age'}).text.split()[0]
+                phone = soup.find('span', {'data-qa': 'resume-contact-preferred'}).text
+                position = soup.find('span', {'data-qa': 'resume-block-title-position'}).text
+                salary = soup.find('span', {'data-qa': 'resume-block-salary'}).text.replace('руб', '').replace('.','')
+                email = soup.find('div', {'data-qa': 'resume-contact-email'}).text
+                photo = File(open('media/candidate/photo/anonymos.jpeg', 'rb'))
+                Candidate(name = name, sex = gender, phone = phone, email = email , position = position,
+                          birthdate = date.today() - relativedelta(years=int(age)), photo=photo, cv = file).save()
+        return redirect('/candidates')

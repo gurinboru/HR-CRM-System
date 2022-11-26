@@ -2,7 +2,7 @@
 {% load static %}
 {% block content %}
 
-<form action="/upload" enctype="multipart/form-data" method = "POST">
+<form action="/parseHTML" enctype="multipart/form-data" method = "POST">
    {% csrf_token %}
     <div class="flex items-center justify-center w-100 pt-8">
         <label for="dropzone-file" class="flex flex-col items-center justify-center w-100 h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600">
@@ -11,8 +11,9 @@
                 <p class="mb-2 text-sm text-gray-500 dark:text-gray-400"><span class="font-semibold">Нажмите, чтобы загрузить</span> или перетащите файл</p>
                 <p class="text-xs text-gray-500 dark:text-gray-400">формата HTML</p>
             </div>
-            <input id="dropzone-file" type="file" class="hidden" />
+            {{ form.file }}
         </label>
+        <button type="submit" class="h-8 bg-gray-800 hover:bg-gray-900 text-white text-sm font-medium hover:text-white px-16 pl-16 hover:border-transparent rounded">Отправить</button>
     </div>
 </form>
 {% endblock %}
