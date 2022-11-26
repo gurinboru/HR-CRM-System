@@ -1,18 +1,19 @@
 {% extends 'start/header.html' %}
 {% load static %}
 {% block content %}
-    <body bgcolor="#76859B">
+    <body >
     <div class="md:grid px-96 pt-4 ml-32">
-                <a href="/add_candidate">
+        <a href="/add_candidate">
         <button class="h-8 bg-gray-800 hover:bg-gray-900 text-white text-sm font-medium hover:text-white pr-12 pl-12 hover:border-transparent rounded">Добавить кандидата</button>
       </a>
         </div>
-        <div>
+        <section class="min-h-screen body-font text-gray-600 ">
+        <div class="container mx-auto px-5 py-10">
+        <div class="-m-4 flex flex-wrap">
         {% for candidate in candidates %}
-            <a href="cercandidate/{{ candidate.id }}">
+<!--            <a href="cercandidate/{{ candidate.id }}">
                 <button class=" ml-20 col-span-6 sm:col-span-6 md:col-span-3 lg:col-span-2 xl:col-span-2 align-content-center">
                   <div class="bg-white shadow-lg hover:bg-gray-800 rounded-lg px-4 py-6 mx-4 my-4">
-{#                    <div class="mx-auto h-40 bg-gradient-to-r from-blue-300 via-green-100 to-pink-300 rounded-md rounded-md">{{ photo }}</div>#}
                       <img src="{{ candidate.photo.url }}" width="450" height="300">
                         <div class="bg-white h-15 text-black-600 font-semibold py-2 px-36 hover:border-transparent rounded">
                             <a>{{ candidate.name }} <br> {{ candidate.email }} <br> {{ candidate.birthdate }}</a>
@@ -21,10 +22,21 @@
                     </div>
                   </div>
                 </button>
-            </a>
+            </a>-->
+            <div class="w-full p-4 md:w-1/2 lg:w-1/4">
+          <a href="cercandidate/{{ candidate.id }}" class="relative block h-48 overflow-hidden rounded">
+            <img alt="ecommerce" class="block h-full w-full object-cover object-center cursor-pointer" src="{{ candidate.photo.url }}" />
+          </a>
+          <div class="mt-4">
+            <h1 class="title-font text-xl font-medium text-black">{{ candidate.name }}</h1>
+              <h2 class="title-font mb-1 text-lg tracking-widest text-gray-800">{{ candidate.email }}</h2>
+                <h2 class="title-font text-lg font-medium text-gray-800">{{ candidate.birthdate }}</h2>
+          </div>
+        </div>
         {% endfor %}
         </div>
-
+            </div>
+        </section>
     </body>
 {% endblock %}
 {% block title %}
