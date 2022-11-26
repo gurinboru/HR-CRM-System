@@ -1,5 +1,6 @@
 # HR-CRM-System
 ## About
+
 Данный проект реализован в рамках кейса от компании WebAnt [5-го Регионального хакатона RinhHack][1], проводимого на 
 базе университета РГЭУ(РИНХ). В рамках проекта было создано MVP приложение, представляющее собой CRM систему для 
 сотрудников HR службы, где HR'ы могут создавать кандидатов, вакансии и отклики на них, а также редактировать их и 
@@ -11,27 +12,26 @@ This project was implemented as part of a case study from WebAnt of the [5th Reg
 the basis of the University of Russian State University (RINH). As part of the project, an MVP application was created, 
 which is a CRM system for HR service employees, where HR's can create candidates, vacancies and responses to them, as 
 well as edit them and receive information about changes in response statuses.
----
+
 ## Setup
 Для начала работы необходимо распаковать файл с зависимостями `requirements.txt`, и создать '.env' файл с информацией о 
 подключении к облачной базе данных.
 
 To get started, you need to unpack the file with dependencies `requirements.txt`, and create a '.env' file with 
 information about connecting to the cloud database.
----
+
 ## Stack
 * Django 4.1.3
 * MySQL
 * Tailwind
 * Python 3.10
 * HTML/CSS/JS
----
+
 ## Results
 Данный проект получил первое место в рамках своего трека.
 
 This project received the first place within its track.
 
----
 ## Team
 * [Школина Анна][2]
 * [Томина Инна][3]
